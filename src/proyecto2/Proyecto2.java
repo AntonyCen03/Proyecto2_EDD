@@ -31,12 +31,13 @@ public class Proyecto2 {
 //        ABB.Insertar(2);
 //        ABB.Insertar(4);
 //        ABB.Insertar(12);
+//
 //        
 //        System.out.println(ABB.InOrden(ABB.getRoot(),""));
 //        System.out.println(ABB.PreOrden(ABB.getRoot(),""));
 //        System.out.println(ABB.PosOrden(ABB.getRoot(), ""));
 //        System.out.println(ABB.Buscar(8, ABB.getRoot()));
-    
+//    
         
     }
     

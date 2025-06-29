@@ -19,6 +19,10 @@ public class ArbolABB {
         return node==null;
     }
     
+    public void Vaciar(){
+        this.Root=null;
+    }
+    
     public String PreOrden(NodoABB root, String cadena){
         if (root!=null) {
             cadena += root.getDato()+",";

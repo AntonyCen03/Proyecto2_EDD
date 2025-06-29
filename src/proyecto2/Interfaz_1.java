@@ -85,7 +85,15 @@ public class Interfaz_1 extends javax.swing.JFrame {
                  
                  //Leer todo el archivo y concatenar las lineas
                  while((line=reader.readLine())!=null){
+                     String textoValido = line.trim().toUpperCase();
+                     if (!textoValido.matches("[ATCG]+")) {
+                         JOptionPane.showMessageDialog(this, 
+                                 "El archivo contiene caracteres no válido. Solo A,T,C,G permitido", 
+                                 "Error", JOptionPane.ERROR_MESSAGE);
+                         return;
+                     }
                      secuenciaCompleta.append(line.trim());
+                     
                  }
                     //System.out.println(secuenciaCompleta);
                     
@@ -106,7 +114,7 @@ public class Interfaz_1 extends javax.swing.JFrame {
                         
                     }
                     System.out.println(triletesConComas);
-                reader.close();
+                
                  
                 }catch(IOException e){
                 JOptionPane.showMessageDialog(this, "Error al leer el archivo"+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
