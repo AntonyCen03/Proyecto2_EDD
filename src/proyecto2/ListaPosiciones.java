@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  * @author ANTONY
  */
 public class ListaPosiciones {
-    private NodoPosiciones cabeza;
+    private NodoPosicion cabeza;
     private int tamaño;
 
     public ListaPosiciones() {
@@ -39,11 +39,11 @@ public class ListaPosiciones {
      * @param posicion La posición en la secuencia de ADN
      */
     public void agregar(int posicion){
-        NodoPosiciones nuevoNodo=new NodoPosiciones(posicion);
+        NodoPosicion nuevoNodo=new NodoPosicion(posicion);
         if (this.EsVacio()) {
             cabeza=nuevoNodo;
         }else{
-            NodoPosiciones actual=cabeza;
+            NodoPosicion actual=cabeza;
             while(actual.getSiguiente()!=null){
                 actual.setSiguiente(actual);
             }
@@ -61,7 +61,7 @@ public class ListaPosiciones {
         if (indice < 0 || indice>= tamaño) {
             JOptionPane.showMessageDialog(null, "Indice fuera de rango"+indice);
         }
-        NodoPosiciones actual=cabeza;
+        NodoPosicion actual=cabeza;
         for (int i = 0; i < indice; i++) {
             actual.getSiguiente();
         }
@@ -74,7 +74,7 @@ public class ListaPosiciones {
      */
     public String toString(){
         StringBuilder  sb = new StringBuilder ();
-        NodoPosiciones actual= cabeza;
+        NodoPosicion actual= cabeza;
         
         while(actual!=null){
             sb.append(actual.getPosicion());
@@ -89,14 +89,14 @@ public class ListaPosiciones {
     /**
      * @return the cabeza
      */
-    public NodoPosiciones getCabeza() {
+    public NodoPosicion getCabeza() {
         return cabeza;
     }
 
     /**
      * @param cabeza the cabeza to set
      */
-    public void setCabeza(NodoPosiciones cabeza) {
+    public void setCabeza(NodoPosicion cabeza) {
         this.cabeza = cabeza;
     }
 

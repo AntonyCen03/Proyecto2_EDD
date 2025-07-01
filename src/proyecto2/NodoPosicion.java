@@ -8,11 +8,11 @@ package proyecto2;
  *
  * @author ANTONY
  */
-public class NodoPosiciones {
+public class NodoPosicion {
     private int posicion;
-    private NodoPosiciones siguiente;
+    private NodoPosicion siguiente;
 
-    public NodoPosiciones(int posicion) {
+    public NodoPosicion(int posicion) {
         this.posicion = posicion;
         this.siguiente = null;
     }
@@ -34,14 +34,14 @@ public class NodoPosiciones {
     /**
      * @return the siguiente
      */
-    public NodoPosiciones getSiguiente() {
+    public NodoPosicion getSiguiente() {
         return siguiente;
     }
 
     /**
      * @param siguiente the siguiente to set
      */
-    public void setSiguiente(NodoPosiciones siguiente) {
+    public void setSiguiente(NodoPosicion siguiente) {
         this.siguiente = siguiente;
     }
     
