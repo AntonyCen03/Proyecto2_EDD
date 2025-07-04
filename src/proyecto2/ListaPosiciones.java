@@ -82,7 +82,7 @@ public class ListaPosiciones {
             if (actual.getSiguiente()!=null) {
                 sb.append(", ");
             }
-            actual.getSiguiente();
+            actual=actual.getSiguiente();
         }
         return sb.toString();
     }

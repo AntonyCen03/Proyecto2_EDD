@@ -17,13 +17,16 @@ public class ListaEnlazada {
         this.size = 0;
     }
     
+    public boolean EsVacio(){
+        return size==0;
+    }
     
     
     public void insertar(String triplete, int posicion){
         NodoHash actual=getCabeza();
         while (actual != null){
             if (actual.getTriplete().equals(triplete)) {
-                actual.setFrecuencia(+1);
+                actual.setFrecuencia(actual.getFrecuencia()+1);
                 actual.getPosiciones().agregar(posicion);
                 return;
             }
@@ -52,6 +55,8 @@ public class ListaEnlazada {
         }
         return null;
     }
+    
+ 
     
     public String getInfoPatron(String triplete){
         NodoHash nodo=buscar(triplete);

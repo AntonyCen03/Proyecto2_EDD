@@ -117,5 +117,18 @@ public class TablaHashADN {
         return menosFrecuente;
     }
     
+    public ArbolABB construirArbolFrecuencias() {
+    ArbolABB arbol = new ArbolABB();
+    
+    for (ListaEnlazada lista : tabla) {
+        NodoHash actual = lista.getCabeza();
+        while (actual != null) {
+            arbol.Insertar(actual);
+            actual = actual.getpNext();
+        }
+    }
+    
+    return arbol;
+    }
     
 }
