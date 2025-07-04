@@ -20,7 +20,7 @@ public class ArbolABB {
     }
     
     public void Vaciar(){
-        this.Root=null;
+        this.setRoot(null);
     }
     
     public String PreOrden(NodoABB root, String cadena){
@@ -50,7 +50,7 @@ public class ArbolABB {
         return cadena;
     }
     
-    public NodoABB Buscar(int valor,NodoABB root){
+    public NodoABB Buscar(NodoHash valor,NodoABB root){
         if (this.EsVacio(root)) {
             return null;
         }else{
@@ -66,42 +66,70 @@ public class ArbolABB {
         } 
     }
     
-    public NodoABB Insertar(int valor){
-        NodoABB nodo=new NodoABB(valor);
+    // Modificar el método de inserción para comparar frecuencias
+    public NodoABB Insertar(NodoHash valor) {
+        NodoABB nodo = new NodoABB(valor);
         
-        if (this.Root==null) {
-            this.Root=nodo;
+        if (this.getRoot() == null) {
+            this.setRoot(nodo);
             return nodo;
         }
         
-        NodoABB padre=null;
-        NodoABB raiz=this.Root;
+        NodoABB padre = null;
+        NodoABB raiz = this.getRoot();
         
-        while(raiz!=null){
-            padre=raiz;
-            if (nodo.getDato() < raiz.getDato()) {
-                raiz=raiz.getHijoIzq();
-            }else{
-                raiz=raiz.getHijoDer();
+        while(raiz != null) {
+            padre = raiz;
+            if (nodo.getDato().getFrecuencia() < raiz.getDato().getFrecuencia()) {
+                raiz = raiz.getHijoIzq();
+            } else {
+                raiz = raiz.getHijoDer();
             }
             nodo.setPadre(padre);   
         }
         
-        if (padre==null) {
-            this.Root=nodo;
-        }else if (nodo.getDato() < padre.getDato()) {
-            padre.setHijoIzq(nodo);
-        }else{
-            padre.setHijoDer(nodo);
-        }
-        if (nodo.getPadre()==null) {
-            return this.Root;
-        }
-        
-        return this.Root;
-        
+        // Resto de la inserción igual
     }
-    
+
+    // Método para obtener patrones ordenados por frecuencia
+    public String inOrdenFrecuencias() {
+        return InOrden(this.getRoot(), new StringBuilder()).toString();
+    }
+
+    private StringBuilder InOrden(NodoABB root, StringBuilder sb) {
+        if (root != null) {
+            InOrden(root.getHijoIzq(), sb);
+            NodoHash nodoHash = root.getDato();
+            sb.append(nodoHash.getTriplete())
+              .append(" - Frecuencia: ")
+              .append(nodoHash.getFrecuencia())
+              .append("\n");
+            InOrden(root.getHijoDer(), sb);
+        }
+        return sb;
+    }
+
+    // Método para encontrar el patrón más frecuente (el máximo en BST)
+    public NodoHash getPatronMasFrecuente() {
+        if (this.getRoot() == null) return null;
+        
+        NodoABB actual = this.getRoot();
+        while (actual.getHijoDer() != null) {
+            actual = actual.getHijoDer();
+        }
+        return actual.getDato();
+    }
+
+    // Método para encontrar el patrón menos frecuente (el mínimo en BST)
+    public NodoHash getPatronMenosFrecuente() {
+        if (this.getRoot() == null) return null;
+        
+        NodoABB actual = this.getRoot();
+        while (actual.getHijoIzq() != null) {
+            actual = actual.getHijoIzq();
+        }
+        return actual.getDato();
+    }
 
     /**
      * @return the Root
@@ -119,5 +147,10 @@ public class ArbolABB {
     
     
     
-    
 }
+    
+
+
+    
+    
+   

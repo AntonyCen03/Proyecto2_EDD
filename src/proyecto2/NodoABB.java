@@ -9,30 +9,16 @@ package proyecto2;
  * @author ANTONY
  */
 public class NodoABB {
-    private int dato;
+    private NodoHash dato;
     private NodoABB Padre;
     private NodoABB HijoIzq;
     private NodoABB HijoDer;
 
-    public NodoABB(int dato) {
+    public NodoABB(NodoHash dato) {
         this.dato = dato;
         this.Padre = null;
         this.HijoIzq = null;
         this.HijoDer = null;
-    }
-
-    /**
-     * @return the dato
-     */
-    public int getDato() {
-        return dato;
-    }
-
-    /**
-     * @param dato the dato to set
-     */
-    public void setDato(int dato) {
-        this.dato = dato;
     }
 
     /**
@@ -75,6 +61,20 @@ public class NodoABB {
      */
     public void setHijoDer(NodoABB HijoDer) {
         this.HijoDer = HijoDer;
+    }
+
+    /**
+     * @return the dato
+     */
+    public NodoHash getDato() {
+        return dato;
+    }
+
+    /**
+     * @param dato the dato to set
+     */
+    public void setDato(NodoHash dato) {
+        this.dato = dato;
     }
     
     
