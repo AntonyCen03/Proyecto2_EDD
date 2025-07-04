@@ -45,6 +45,8 @@ public class Interfaz extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label1.setAlignment(java.awt.Label.CENTER);
@@ -54,6 +56,11 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel1.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 170, 40));
 
         SubirArchivo.setLabel("Cargar Archivo");
+        SubirArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SubirArchivoActionPerformed(evt);
+            }
+        });
         jPanel1.add(SubirArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, -1, -1));
 
         Integrantes1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -80,6 +87,12 @@ public class Interfaz extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void SubirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubirArchivoActionPerformed
+        SegundaInterfaz SI = new SegundaInterfaz();
+        SI.setVisible(true);
+        SI.setLocationRelativeTo(null);
+    }//GEN-LAST:event_SubirArchivoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -109,6 +122,9 @@ public class Interfaz extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
+        
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Interfaz().setVisible(true);

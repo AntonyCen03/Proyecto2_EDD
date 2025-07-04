@@ -11,9 +11,13 @@ package proyecto2;
  */
 public class ResultadosInterfaz extends javax.swing.JFrame {
 
+    private ResultadosInterfaz ss;
+
     /**
      * Creates new form ResultadosInterfaz
      */
+   
+    
     public ResultadosInterfaz() {
         initComponents();
     }
@@ -36,6 +40,8 @@ public class ResultadosInterfaz extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -45,12 +51,31 @@ public class ResultadosInterfaz extends javax.swing.JFrame {
         jPanel1.add(textArea2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 300, 200));
 
         Regresar.setLabel("Regresar");
+        Regresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegresarActionPerformed(evt);
+            }
+        });
         jPanel1.add(Regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarActionPerformed
+        // TODO add your handling code here:
+      
+        this.setVisible(false);
+        
+        
+        SegundaInterfaz segunda = new SegundaInterfaz();
+        segunda.setVisible(true);
+        segunda.setLocationRelativeTo(null);
+        
+        
+        
+    }//GEN-LAST:event_RegresarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -14,6 +14,8 @@ public class SegundaInterfaz extends javax.swing.JFrame {
     /**
      * Creates new form SegundaInterfaz
      */
+    
+    
     public SegundaInterfaz() {
         initComponents();
     }
@@ -33,7 +35,7 @@ public class SegundaInterfaz extends javax.swing.JFrame {
         BuscarPatron = new java.awt.Button();
         MenosFrecuentes = new java.awt.Button();
         MasFrecuentes = new java.awt.Button();
-        button1 = new java.awt.Button();
+        ReporteColisiones = new java.awt.Button();
         ListadoAminoacidos = new java.awt.Button();
         textField1 = new java.awt.TextField();
         label2 = new java.awt.Label();
@@ -41,6 +43,8 @@ public class SegundaInterfaz extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -51,32 +55,62 @@ public class SegundaInterfaz extends javax.swing.JFrame {
         PatronesAlmacenados.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         PatronesAlmacenados.setLabel("Patrones Almacenados");
         PatronesAlmacenados.setName("Patrones Almacenados"); // NOI18N
-        jPanel1.add(PatronesAlmacenados, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, -1, -1));
+        PatronesAlmacenados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PatronesAlmacenadosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(PatronesAlmacenados, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, -1, -1));
 
         BuscarPatron.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         BuscarPatron.setLabel("Buscar Patron");
         BuscarPatron.setName("BuscarPatron"); // NOI18N
+        BuscarPatron.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarPatronActionPerformed(evt);
+            }
+        });
         jPanel1.add(BuscarPatron, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 110, -1));
 
         MenosFrecuentes.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         MenosFrecuentes.setLabel("Patron Menos Frecuentes");
         MenosFrecuentes.setName("MenosFrecuente"); // NOI18N
+        MenosFrecuentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenosFrecuentesActionPerformed(evt);
+            }
+        });
         jPanel1.add(MenosFrecuentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
 
         MasFrecuentes.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         MasFrecuentes.setLabel("Patron Mas Frecuentes");
         MasFrecuentes.setName("MasFrecuentes"); // NOI18N
+        MasFrecuentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MasFrecuentesActionPerformed(evt);
+            }
+        });
         jPanel1.add(MasFrecuentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
 
-        button1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        button1.setLabel("Reporte Colisones");
-        button1.setName("ReporteColisiones"); // NOI18N
-        jPanel1.add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, -1, -1));
+        ReporteColisiones.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        ReporteColisiones.setLabel("Reporte Colisones");
+        ReporteColisiones.setName("ReporteColisiones"); // NOI18N
+        ReporteColisiones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReporteColisionesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ReporteColisiones, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, -1, -1));
 
         ListadoAminoacidos.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         ListadoAminoacidos.setLabel("Lista de Aminoacidos");
         ListadoAminoacidos.setName(""); // NOI18N
-        jPanel1.add(ListadoAminoacidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, -1, -1));
+        ListadoAminoacidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListadoAminoacidosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ListadoAminoacidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, -1, -1));
         jPanel1.add(textField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 110, 20));
 
         label2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -85,10 +119,62 @@ public class SegundaInterfaz extends javax.swing.JFrame {
         label2.setText("Inserte el patron:");
         jPanel1.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 460));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 370));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BuscarPatronActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarPatronActionPerformed
+        // TODO add your handling code here:
+        
+        ResultadosInterfaz resultado = new ResultadosInterfaz();
+        resultado.setVisible(true);
+        resultado.setLocationRelativeTo(null);
+        this.setVisible(false);
+    }//GEN-LAST:event_BuscarPatronActionPerformed
+
+    private void ReporteColisionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteColisionesActionPerformed
+
+        // TODO add your handling code here:
+        ResultadosInterfaz resultado = new ResultadosInterfaz();
+        resultado.setVisible(true);
+        resultado.setLocationRelativeTo(null);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_ReporteColisionesActionPerformed
+
+    private void MasFrecuentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MasFrecuentesActionPerformed
+        // TODO add your handling code here:
+        ResultadosInterfaz resultado = new ResultadosInterfaz();
+        resultado.setVisible(true);
+        resultado.setLocationRelativeTo(null);
+        this.setVisible(false);
+    }//GEN-LAST:event_MasFrecuentesActionPerformed
+
+    private void ListadoAminoacidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListadoAminoacidosActionPerformed
+        // TODO add your handling code here:
+        ResultadosInterfaz resultado = new ResultadosInterfaz();
+        resultado.setVisible(true);
+        resultado.setLocationRelativeTo(null);
+        this.setVisible(false);
+    }//GEN-LAST:event_ListadoAminoacidosActionPerformed
+
+    private void MenosFrecuentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenosFrecuentesActionPerformed
+        // TODO add your handling code here:
+        ResultadosInterfaz resultado = new ResultadosInterfaz();
+        resultado.setVisible(true);
+        resultado.setLocationRelativeTo(null);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_MenosFrecuentesActionPerformed
+
+    private void PatronesAlmacenadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatronesAlmacenadosActionPerformed
+        // TODO add your handling code here:
+        ResultadosInterfaz resultado = new ResultadosInterfaz();
+        resultado.setVisible(true);
+        resultado.setLocationRelativeTo(null);
+        this.setVisible(false);
+    }//GEN-LAST:event_PatronesAlmacenadosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,7 +217,7 @@ public class SegundaInterfaz extends javax.swing.JFrame {
     private java.awt.Button MasFrecuentes;
     private java.awt.Button MenosFrecuentes;
     private java.awt.Button PatronesAlmacenados;
-    private java.awt.Button button1;
+    private java.awt.Button ReporteColisiones;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label label1;
     private java.awt.Label label2;
