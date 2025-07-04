@@ -45,7 +45,7 @@ public class ListaPosiciones {
         }else{
             NodoPosicion actual=cabeza;
             while(actual.getSiguiente()!=null){
-                actual.setSiguiente(actual);
+                actual= actual.getSiguiente();
             }
             actual.setSiguiente(nuevoNodo);
         }

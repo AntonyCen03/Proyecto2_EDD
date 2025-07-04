@@ -19,7 +19,9 @@ import javax.swing.JOptionPane;
 public class Interfaz_1 extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Interfaz_1.class.getName());
-
+    private TablaHashADN tablaHash;
+    private ArbolABB arbolFrecuencias;
+    
     /**
      * Creates new form Interfaz_1
      */
@@ -80,41 +82,54 @@ public class Interfaz_1 extends javax.swing.JFrame {
                         new InputStreamReader(new FileInputStream(archivo),StandardCharsets.UTF_8))) 
                 {
                  
-                 StringBuilder secuenciaCompleta= new StringBuilder();
-                 String line;
+                StringBuilder secuenciaCompleta= new StringBuilder();
+                String line;
                  
                  //Leer todo el archivo y concatenar las lineas
-                 while((line=reader.readLine())!=null){
-                     String textoValido = line.trim().toUpperCase();
-                     if (!textoValido.matches("[ATCG]+")) {
-                         JOptionPane.showMessageDialog(this, 
-                                 "El archivo contiene caracteres no válido. Solo A,T,C,G permitido", 
-                                 "Error", JOptionPane.ERROR_MESSAGE);
-                         return;
-                     }
-                     secuenciaCompleta.append(line.trim());
-                     
-                 }
+                while((line=reader.readLine())!=null){
+                    String textoValido = line.trim().toUpperCase();
+                    if (!textoValido.matches("[ATCG]+")) {
+                        JOptionPane.showMessageDialog(this, 
+                                "El archivo contiene caracteres no válido. Solo A,T,C,G permitido", 
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    secuenciaCompleta.append(line.trim());
+
+                }
                     //System.out.println(secuenciaCompleta);
                     
                  
                  //Procesar la secuencia completa
-                 String secuenciaADN = secuenciaCompleta.toString();
-                 StringBuilder triletesConComas = new StringBuilder();
-                 
-                    // Dividir en tripletes y agregar comas
-                    for (int i = 0; i <= secuenciaADN.length() -3 ; i+=3) {
-                        String triplete= secuenciaADN.substring(i,i+3);
-                        triletesConComas.append(triplete);
-                        
-                        // Agregar coma si no es el último triplete
-                        if (i < secuenciaADN.length() -3) {
-                            triletesConComas.append("\n");
-                        }
-                        
-                    }
-                    System.out.println(triletesConComas);
+                String secuenciaADN = secuenciaCompleta.toString();
                 
+                StringBuilder triletesConComas = new StringBuilder();
+
+                   // Dividir en tripletes y agregar comas
+                   for (int i = 0; i <= secuenciaADN.length() -3 ; i+=3) {
+                       String triplete= secuenciaADN.substring(i,i+3);
+                       triletesConComas.append(triplete);
+
+                       // Agregar coma si no es el último triplete
+                       if (i < secuenciaADN.length() -3) {
+                           triletesConComas.append("\n");
+                       }
+
+                   }
+                   System.out.println(triletesConComas);
+                 
+                 // 2. Inicializar la tabla hash (tamaño primo recomendado)
+                tablaHash = new TablaHashADN(101);
+                 
+                 // 3. Procesar la secuencia e insertar en tabla hash
+                for (int i = 0; i <= secuenciaADN.length() - 3; i++) {
+                    String triplete = secuenciaADN.substring(i, i + 3);
+                    tablaHash.insertar(triplete, i); // Insertar triplete con su posición
+                }
+                
+                // 4. Construir el árbol binario con las frecuencias
+                arbolFrecuencias = tablaHash.construirArbolFrecuencias();
+
                  
                 }catch(IOException e){
                 JOptionPane.showMessageDialog(this, "Error al leer el archivo"+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

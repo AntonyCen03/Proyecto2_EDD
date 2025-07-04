@@ -50,45 +50,80 @@ public class ArbolABB {
         return cadena;
     }
     
-    public NodoABB Buscar(NodoHash valor,NodoABB root){
+    public NodoABB Buscar(NodoHash valor, NodoABB root) {
         if (this.EsVacio(root)) {
             return null;
-        }else{
-            if (root.getDato()==valor) {
+        }
+
+        // Comparar por frecuencia (que es cómo está ordenado el árbol)
+        int comparacion = Integer.compare(valor.getFrecuencia(), root.getDato().getFrecuencia());
+
+        if (comparacion == 0) {
+            // Misma frecuencia, verificar si es el mismo triplete
+            if (root.getDato().getTriplete().equals(valor.getTriplete())) {
                 return root;
-            }else{
-                if (valor<root.getDato()) {
-                    return Buscar(valor,root.getHijoIzq());
-                }else{
-                    return Buscar(valor, root.getHijoDer());
-                }
             }
+            // Si no es el mismo triplete, buscar en ambos subárboles
+            NodoABB encontrado = Buscar(valor, root.getHijoIzq());
+            return (encontrado != null) ? encontrado : Buscar(valor, root.getHijoDer());
         } 
+        else if (comparacion < 0) {
+            return Buscar(valor, root.getHijoIzq());
+        } 
+        else {
+            return Buscar(valor, root.getHijoDer());
+        }
+    }
+    
+    public NodoABB buscarPorTriplete(String triplete, NodoABB root) {
+        if (this.EsVacio(root)) {
+            return null;
+        }
+
+        // Buscar primero en el subárbol izquierdo
+        NodoABB encontrado = buscarPorTriplete(triplete, root.getHijoIzq());
+        if (encontrado != null) {
+            return encontrado;
+        }
+
+        // Verificar el nodo actual
+        if (root.getDato().getTriplete().equals(triplete)) {
+            return root;
+        }
+
+        // Finalmente buscar en el subárbol derecho
+        return buscarPorTriplete(triplete, root.getHijoDer());
     }
     
     // Modificar el método de inserción para comparar frecuencias
     public NodoABB Insertar(NodoHash valor) {
-        NodoABB nodo = new NodoABB(valor);
-        
-        if (this.getRoot() == null) {
-            this.setRoot(nodo);
-            return nodo;
+        NodoABB nuevoNodo = new NodoABB(valor);
+    
+        if (this.Root == null) {
+            this.Root = nuevoNodo;
+            return nuevoNodo;
         }
-        
+
+        NodoABB actual = this.Root;
         NodoABB padre = null;
-        NodoABB raiz = this.getRoot();
-        
-        while(raiz != null) {
-            padre = raiz;
-            if (nodo.getDato().getFrecuencia() < raiz.getDato().getFrecuencia()) {
-                raiz = raiz.getHijoIzq();
+
+        while (actual != null) {
+            padre = actual;
+            if (valor.getFrecuencia() < actual.getDato().getFrecuencia()) {
+                actual = actual.getHijoIzq();
             } else {
-                raiz = raiz.getHijoDer();
+                actual = actual.getHijoDer();
             }
-            nodo.setPadre(padre);   
         }
-        
-        // Resto de la inserción igual
+
+        if (valor.getFrecuencia() < padre.getDato().getFrecuencia()) {
+            padre.setHijoIzq(nuevoNodo);
+        } else {
+            padre.setHijoDer(nuevoNodo);
+        }
+        nuevoNodo.setPadre(padre);
+
+        return nuevoNodo;
     }
 
     // Método para obtener patrones ordenados por frecuencia
@@ -145,8 +180,7 @@ public class ArbolABB {
         this.Root = Root;
     }
     
-    
-    
+       
 }
     
 
