@@ -72,6 +72,7 @@ public class ListaPosiciones {
      * Convierte la lista de posiciones a un String
      * @return String con las posiciones separadas por comas
      */
+    @Override
     public String toString(){
         StringBuilder  sb = new StringBuilder ();
         NodoPosicion actual= cabeza;
