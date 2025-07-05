@@ -83,12 +83,12 @@ public class TablaHashADN {
         StringBuilder reporte = new StringBuilder();
         int colisionesReales = 0;
 
-        for (int i = 0; i < capacidad; i++) {
-            int elementos = tabla[i].getSize();
+        for (int i = 0; i < getCapacidad(); i++) {
+            int elementos = getTabla()[i].getSize();
             if (elementos > 1) {
-                int colisionesBucket = elementos - 1;
+                int colisionesBucket = elementos - 1; 
                 colisionesReales += colisionesBucket;
-                reporte.append("Bucket ")
+                reporte.append("Índice ")
                        .append(i)
                        .append(": ")
                        .append(elementos)
@@ -98,8 +98,7 @@ public class TablaHashADN {
             }
         }
 
-        reporte.insert(0, "=== REPORTE DE COLISIONES ===\n"
-                        + "Colisiones totales: " + colisionesReales + "\n\n");
+        reporte.insert(0, "Total de colisiones reales: " + colisionesReales + "\n");
         return reporte.toString();
     }
     

@@ -137,8 +137,10 @@ public class Interfaz_1 extends javax.swing.JFrame {
                 
                 // 4. Construir el árbol binario con las frecuencias
                 arbolFrecuencias = tablaHash.construirArbolFrecuencias();
-
-                int totalTripletes= Math.max(0, secuenciaADN.length() -2);
+                
+                Interfaz_2 ventana2=new Interfaz_2(tablaHash,arbolFrecuencias);
+                ventana2.show();
+                ventana2.setLocationRelativeTo(null);
                 
                 JOptionPane.showMessageDialog(this, 
                     tablaHash.generarReporteCompleto(),
