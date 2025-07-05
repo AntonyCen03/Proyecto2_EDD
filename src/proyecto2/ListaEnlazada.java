@@ -22,29 +22,47 @@ public class ListaEnlazada {
     }
 
     
-    public void insertar(String triplete, int posicion){
-        NodoHash actual=getCabeza();
-        while (actual != null){
+//    public void insertar(String triplete, int posicion){
+//        NodoHash actual=getCabeza();
+//        while (actual != null){
+//            if (actual.getTriplete().equals(triplete)) {
+//                actual.setFrecuencia(actual.getFrecuencia()+1);
+//                actual.getPosiciones().agregar(posicion);
+//                return;
+//            }
+//            actual=actual.getpNext();
+//        }
+//        
+//        //Si no existe agregar nuevo nodo
+//        NodoHash nuevo=new NodoHash(triplete, posicion);
+//        nuevo.setpNext(getCabeza());
+//        setCabeza(nuevo);
+//        size++;
+//        
+//    }
+    
+    public boolean insertar(String triplete, int posicion) {
+        NodoHash actual = getCabeza();
+        while (actual != null) {
             if (actual.getTriplete().equals(triplete)) {
-                actual.setFrecuencia(actual.getFrecuencia()+1);
+                actual.setFrecuencia(actual.getFrecuencia() + 1);
                 actual.getPosiciones().agregar(posicion);
-                return;
+                return false;
             }
-            actual=actual.getpNext();
+            actual = actual.getpNext();
         }
-        
-        //Si no existe agregar nuevo nodo
-        NodoHash nuevo=new NodoHash(triplete, posicion);
+
+        // Si no existe, agregar nuevo nodo
+        NodoHash nuevo = new NodoHash(triplete, posicion);
         nuevo.setpNext(getCabeza());
         setCabeza(nuevo);
         size++;
-        
+        return true; 
     }
     
     public void insertar2(String triplete, int frecuencia) {
-        NodoHash nuevo = new NodoHash(triplete, 0); // Posición no importa aquí
-        nuevo.setFrecuencia(frecuencia); // Establecemos la frecuencia directamente
-        nuevo.setpNext(getCabeza());
+        NodoHash nuevo = new NodoHash(triplete, 0); 
+        nuevo.setFrecuencia(frecuencia); 
         setCabeza(nuevo);
         size++;
     }

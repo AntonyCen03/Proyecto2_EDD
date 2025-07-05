@@ -42,61 +42,33 @@ public class TablaHashADN {
     
     
     
-//    private int funcionHash(String triplete){
-//        if (triplete==null || triplete.length()!=3) {
-//            return 0;
+//    public void insertar(String triplete, int posicion) {
+//        if (triplete == null || triplete.length() != 3) {  
+//            System.out.println("Triplete inválido: " + triplete); 
+//            return;
 //        }
-//        
-//        //Convertir a ARN (cambiar T por U)
-//        String tripleteARN = triplete.replace('T', 'U');
-//        
-//        //Calcular valor hash basado en los 3 nucleotidos
-//        int hash=0;
-//        for (int i = 0; i < 3; i++) {
-//            char c = tripleteARN.charAt(i);
-//            int valorBase=0;
-//            switch(c){
-//                case 'A': valorBase= 0; break;
-//                case 'U': valorBase= 1; break;
-//                case 'C': valorBase= 2; break;
-//                case 'G': valorBase= 3; break;
-//                default: valorBase=0;
-//            }
-//            hash = (hash << 2) | valorBase;
+//
+//        int indice = funcionHash(triplete);
+//        System.out.println("Insertando: " + triplete + " en índice: " + indice); 
+//
+//        if (!tabla[indice].EsVacio()) {
+//            setColisionesTotales(getColisionesTotales() + 1);
 //        }
-//        return Math.abs(hash % capacidad);
+//
+//        getTabla()[indice].insertar(triplete, posicion);
 //    }
     
     public void insertar(String triplete, int posicion) {
-        if (triplete == null || triplete.length() != 3) {  
-            System.out.println("Triplete inválido: " + triplete); 
-            return;
-        }
+        if (triplete == null || triplete.length() != 3) return;
 
         int indice = funcionHash(triplete);
-        System.out.println("Insertando: " + triplete + " en índice: " + indice); 
+        boolean nuevoElemento = getTabla()[indice].insertar(triplete, posicion);
 
-        if (!tabla[indice].EsVacio()) {
+        if (nuevoElemento && getTabla()[indice].getSize() > 1) {
             setColisionesTotales(getColisionesTotales() + 1);
         }
-
-        getTabla()[indice].insertar(triplete, posicion);
     }
 
-//    public void insertar(String triplete, int posicion) {
-//        if (triplete == null || triplete.length() != 3) {
-//            return;
-//        }
-//        
-//        int indice = funcionHash(triplete);
-//        
-//        // Verificar si habrá colisión (si la lista no está vacía)
-//        if (!tabla[indice].EsVacio()) {
-//            colisionesTotales++;
-//        }
-//        
-//        tabla[indice].insertar(triplete, posicion);
-//    }
 
     public NodoHash buscar(String triplete) {
         if (triplete == null || triplete.length() != 3) {
@@ -109,15 +81,25 @@ public class TablaHashADN {
     
     public String generarReporteColisiones() {
         StringBuilder reporte = new StringBuilder();
-        reporte.append("Total de colisiones: ").append(getColisionesTotales()).append("\n");
-        
-        for (int i = 0; i < getCapacidad(); i++) {
-            if (getTabla()[i].getSize() > 1) {
-                reporte.append("Índice ").append(i).append(": ")
-                      .append(getTabla()[i].getSize()).append(" colisiones\n");
+        int colisionesReales = 0;
+
+        for (int i = 0; i < capacidad; i++) {
+            int elementos = tabla[i].getSize();
+            if (elementos > 1) {
+                int colisionesBucket = elementos - 1;
+                colisionesReales += colisionesBucket;
+                reporte.append("Bucket ")
+                       .append(i)
+                       .append(": ")
+                       .append(elementos)
+                       .append(" elementos (")
+                       .append(colisionesBucket)
+                       .append(" colisiones)\n");
             }
         }
-        
+
+        reporte.insert(0, "=== REPORTE DE COLISIONES ===\n"
+                        + "Colisiones totales: " + colisionesReales + "\n\n");
         return reporte.toString();
     }
     
@@ -170,12 +152,12 @@ public class TablaHashADN {
             if (getTabla()[i] != null) {
                 int size = getTabla()[i].getSize();
                 contador += size;
-                if (size > 0) {
-                    System.out.println("Índice " + i + " tiene " + size + " elementos");
-                }
+//                if (size > 0) {
+//                    System.out.println("Índice " + i + " tiene " + size + " elementos");
+//                }
             }
         }
-        System.out.println("Total de tripletes únicos: " + contador); 
+        //System.out.println("Total de tripletes únicos: " + contador); 
         return contador;
     }
     
@@ -230,8 +212,8 @@ public class TablaHashADN {
     public String generarReporteCompleto() {
         StringBuilder reporte = new StringBuilder();
         int totalGeneral = 0;
+        int tripletesUnicos = totalTripletesUnicos();
 
-        // Contar todos los tripletes (incluyendo repetidos)
         for (int i = 0; i < getCapacidad(); i++) {
             if (getTabla()[i] != null) {
                 NodoHash actual = getTabla()[i].getCabeza();
@@ -242,15 +224,22 @@ public class TablaHashADN {
             }
         }
 
-        reporte.append("=== REPORTE DE TRIPLETES ===\n")
-              .append("Total de tripletes (incluyendo repetidos): ").append(totalGeneral).append("\n")
-              .append("Tripletes únicos: ").append(totalTripletesUnicos()).append("\n")
-              .append("Factor de carga: ").append(String.format("%.2f", factorDeCarga())).append("\n\n")
-              .append(generarReporteColisiones()).append("\n");
+        NodoHash masFrecuente = getPatronMasFrecuente();
+        NodoHash menosFrecuente = getPatronMenosFrecuente();
+
+        reporte.append("=== REPORTE COMPLETO ===\n")
+              .append("Total de tripletes: ").append(totalGeneral).append("\n")
+              .append("Tripletes únicos: ").append(tripletesUnicos).append("\n")
+              .append("Factor de carga: ").append(String.format("%.2f", factorDeCarga())).append("\n")
+              .append("Patrón más frecuente: ").append(masFrecuente.getTriplete())
+              .append(" (Frec: ").append(masFrecuente.getFrecuencia()).append(")\n")
+              .append("Patrón menos frecuente: ").append(menosFrecuente.getTriplete())
+              .append(" (Frec: ").append(menosFrecuente.getFrecuencia()).append(")\n\n")
+              .append(generarReporteColisiones());
 
         return reporte.toString();
     }
-    
+
     public String generarReporteAminoacidos() {
         MiListaSimple aminoacidosUnicos = new MiListaSimple();
         ListaEnlazada[] tripletesPorAminoacido = new ListaEnlazada[30];
