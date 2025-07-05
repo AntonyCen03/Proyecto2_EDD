@@ -57,13 +57,13 @@ public class ListaPosiciones {
      * @param indice El índice de la posición deseada
      * @return La posición en la secuencia de ADN
      */
-    public int obtener(int indice){
-        if (indice < 0 || indice>= tamaño) {
-            JOptionPane.showMessageDialog(null, "Indice fuera de rango"+indice);
+    public int obtener(int indice) {
+        if (indice < 0 || indice >= tamaño) {
+            throw new IndexOutOfBoundsException("Índice fuera de rango: " + indice);
         }
-        NodoPosicion actual=cabeza;
+        NodoPosicion actual = cabeza;
         for (int i = 0; i < indice; i++) {
-            actual.getSiguiente();
+            actual = actual.getSiguiente(); // Corregir: faltaba asignación
         }
         return actual.getPosicion();
     }

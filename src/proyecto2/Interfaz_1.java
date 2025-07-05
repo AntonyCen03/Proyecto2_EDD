@@ -87,14 +87,14 @@ public class Interfaz_1 extends javax.swing.JFrame {
                  
                  //Leer todo el archivo y concatenar las lineas
                 while((line=reader.readLine())!=null){
-                    String textoValido = line.trim().toUpperCase();
-                    if (!textoValido.matches("[ATCG]+")) {
+                    String textoValido = line.replaceAll("[^ATCGatcg]", "").toUpperCase();
+                    if (textoValido.length() != line.trim().length()) {
                         JOptionPane.showMessageDialog(this, 
-                                "El archivo contiene caracteres no válido. Solo A,T,C,G permitido", 
-                                "Error", JOptionPane.ERROR_MESSAGE);
+                            "El archivo contiene caracteres no válidos. Solo A,T,C,G permitidos", 
+                            "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
-                    secuenciaCompleta.append(line.trim());
+                    secuenciaCompleta.append(textoValido);
 
                 }
                     //System.out.println(secuenciaCompleta);
@@ -112,25 +112,38 @@ public class Interfaz_1 extends javax.swing.JFrame {
 
                        // Agregar coma si no es el último triplete
                        if (i < secuenciaADN.length() -3) {
-                           triletesConComas.append("\n");
+                           triletesConComas.append(",");
                        }
 
                    }
                    System.out.println(triletesConComas);
+                   
                  
                  // 2. Inicializar la tabla hash (tamaño primo recomendado)
                 tablaHash = new TablaHashADN(101);
                  
                  // 3. Procesar la secuencia e insertar en tabla hash
-                for (int i = 0; i <= secuenciaADN.length() - 3; i++) {
+                for (int i = 0; i <= secuenciaADN.length() - 3; i++) {  // Mantener i++ para procesar todos los tripletes
                     String triplete = secuenciaADN.substring(i, i + 3);
-                    tablaHash.insertar(triplete, i); // Insertar triplete con su posición
+                    tablaHash.insertar(triplete, i);
+
+                    // Opcional: mostrar los primeros 10 tripletes para depuración
+                    if (i < 30) {  // Muestra los primeros 10 tripletes (0-9)
+                        System.out.println("Triplete " + (i/3 + 1) + ": " + triplete);
+                    }
                 }
+                
+                System.out.println("Tripletes insertados. Total único según hash: " + tablaHash.totalTripletesUnicos());
                 
                 // 4. Construir el árbol binario con las frecuencias
                 arbolFrecuencias = tablaHash.construirArbolFrecuencias();
 
-                 
+                int totalTripletes= Math.max(0, secuenciaADN.length() -2);
+                
+                JOptionPane.showMessageDialog(this, 
+                    tablaHash.generarReporteCompleto(),
+                    "Proceso Completado", JOptionPane.INFORMATION_MESSAGE);
+                    
                 }catch(IOException e){
                 JOptionPane.showMessageDialog(this, "Error al leer el archivo"+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }

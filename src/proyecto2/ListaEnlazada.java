@@ -20,7 +20,7 @@ public class ListaEnlazada {
     public boolean EsVacio(){
         return size==0;
     }
-    
+
     
     public void insertar(String triplete, int posicion){
         NodoHash actual=getCabeza();
@@ -37,7 +37,16 @@ public class ListaEnlazada {
         NodoHash nuevo=new NodoHash(triplete, posicion);
         nuevo.setpNext(getCabeza());
         setCabeza(nuevo);
+        size++;
         
+    }
+    
+    public void insertar2(String triplete, int frecuencia) {
+        NodoHash nuevo = new NodoHash(triplete, 0); // Posición no importa aquí
+        nuevo.setFrecuencia(frecuencia); // Establecemos la frecuencia directamente
+        nuevo.setpNext(getCabeza());
+        setCabeza(nuevo);
+        size++;
     }
     
     public NodoHash buscar(String triplete){
