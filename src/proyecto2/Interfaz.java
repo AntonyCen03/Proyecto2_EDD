@@ -4,6 +4,16 @@
  */
 package proyecto2;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Sofia Romero
@@ -89,9 +99,47 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SubirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubirArchivoActionPerformed
+        
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int respuesta = fileChooser.showOpenDialog(this);
+        
+        if(respuesta == JFileChooser.APPROVE_OPTION){
+            java.io.File archivoSeleccionado = fileChooser.getSelectedFile();
+            
+            if (archivoSeleccionado.getName().toLowerCase().endsWith(".txt")) {
+               JOptionPane.showMessageDialog(this, "Archivo TXT seleccionado: " + archivoSeleccionado.getAbsolutePath(), "Archivo Seleccionado", JOptionPane.INFORMATION_MESSAGE);
+                
+            }
+             try (BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(archivoSeleccionado), StandardCharsets.UTF_8))
+                ){
+                    StringBuilder contenido = new StringBuilder();
+                    String line;
+
+                    while ((line = reader.readLine()) != null){
+                        contenido.append(line.trim());
+                    }
+                    
+                    for (int i=0; i<contenido.length(); i+=3 ){
+                        int fin = Math.min(i+3, contenido.length());
+                        String bloque = contenido.substring(i, fin);
+                        System.out.println("Bloque de 3: "+ bloque);
+                    
+                    }
+                    
+                    
+             } catch (IOException ex) {
+                Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        
         SegundaInterfaz SI = new SegundaInterfaz();
         SI.setVisible(true);
         SI.setLocationRelativeTo(null);
+        
+        
     }//GEN-LAST:event_SubirArchivoActionPerformed
 
     /**
@@ -125,10 +173,8 @@ public class Interfaz extends javax.swing.JFrame {
         
         
         
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Interfaz().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Interfaz().setVisible(true);
         });
     }
 
