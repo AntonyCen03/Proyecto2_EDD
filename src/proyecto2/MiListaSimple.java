@@ -5,26 +5,48 @@
 package proyecto2;
 
 /**
- *
- * @author ANTONY
+ * Implementación de una lista enlazada simple para almacenar tripletes de ADN.
+ * Proporciona operaciones básicas para agregar elementos, verificar contención,
+ * y obtener índices de elementos en la lista.
+ * 
+ * @author ANTONY CEN
  */
 public class MiListaSimple {
     private NodoLista pFirst;
     private int size;
 
+    /**
+     * Constructor que inicializa una lista vacía.
+     */
     public MiListaSimple() {
         this.pFirst = null;
         this.size = 0;
     }
     
+    /**
+     * Verifica si la lista está vacía.
+     * 
+     * @return {@code true} si la lista no contiene elementos, {@code false} en caso contrario
+     */
     public boolean EsVacio(){
         return this.size==0;
     }
     
+    /**
+     * Obtiene el número de elementos en la lista.
+     * 
+     * @return El tamaño actual de la lista
+     */
     public int Size(){
         return this.size;
     }
     
+    /**
+     * Agrega un nuevo triplete al final de la lista.
+     * 
+     * @param triplete Cadena de 3 caracteres (A,T,C,G) a agregar
+     * @throws IllegalArgumentException Si el triplete es nulo o no tiene 3 caracteres
+     */
     public void agregar(String triplete){
         NodoLista nuevo= new NodoLista(triplete);
         if (getpFirst()==null) {
@@ -40,6 +62,12 @@ public class MiListaSimple {
         setSize(getSize() + 1);
     }
     
+    /**
+     * Verifica si la lista contiene un triplete específico.
+     * 
+     * @param valor Triplete a buscar en la lista
+     * @return {@code true} si el triplete está en la lista, {@code false} en caso contrario
+     */
     public boolean contiene(String valor) {
         NodoLista actual = pFirst;
         while (actual != null) {
@@ -51,6 +79,12 @@ public class MiListaSimple {
         return false;
     }
 
+    /**
+     * Obtiene el índice de la primera ocurrencia de un triplete en la lista.
+     * 
+     * @param valor Triplete a buscar
+     * @return El índice basado en 0 del triplete, o -1 si no se encuentra
+     */
     public int indiceDe(String valor) {
         NodoLista actual = pFirst;
         int index = 0;
@@ -66,28 +100,36 @@ public class MiListaSimple {
 
 
     /**
-     * @return the pFirst
+     * Obtiene el primer nodo de la lista.
+     * 
+     * @return Primer nodo de la lista, o {@code null} si la lista está vacía
      */
     public NodoLista getpFirst() {
         return pFirst;
     }
 
     /**
-     * @param pFirst the pFirst to set
+     * Establece el primer nodo de la lista.
+     * 
+     * @param pFirst Nuevo nodo a establecer como primero
      */
     public void setpFirst(NodoLista pFirst) {
         this.pFirst = pFirst;
     }
 
     /**
-     * @return the size
+     * Obtiene el tamaño actual de la lista.
+     * 
+     * @return Número de elementos en la lista
      */
     public int getSize() {
         return size;
     }
 
     /**
-     * @param size the size to set
+     * Establece el tamaño de la lista (uso interno).
+     * 
+     * @param size Nuevo tamaño de la lista
      */
     public void setSize(int size) {
         this.size = size;

@@ -5,14 +5,23 @@
 package proyecto2;
 
 /**
- *
- * @author ANTONY
+ * Implementación de una tabla hash especializada para el análisis de secuencias de ADN.
+ * Esta clase permite almacenar, buscar y analizar tripletes de ADN (secuencias de 3 nucleótidos),
+ * incluyendo el cálculo de frecuencias, posiciones y conversión a aminoácidos.
+ * 
+ * @author ANTONY CEN
  */
 public class TablaHashADN {
     private int capacidad;
     private ListaEnlazada[] tabla;
     private int colisionesTotales;
 
+    /**
+     * Constructor que inicializa la tabla hash con una capacidad específica.
+     * 
+     * @param capacidad Tamaño inicial de la tabla hash (recomendado usar números primos)
+     * @throws IllegalArgumentException Si la capacidad es menor o igual a cero
+     */
     public TablaHashADN(int capacidad) {
         this.capacidad = capacidad;
         this.tabla = new ListaEnlazada[capacidad];
@@ -24,7 +33,13 @@ public class TablaHashADN {
         
     }
     
-    // Función hash para tripletes de ADN
+    /**
+     * Calcula el índice hash para un triplete de ADN.
+     * 
+     * @param triplete Cadena de 3 caracteres (A, T, C, G)
+     * @return Índice hash calculado entre 0 y capacidad-1
+     * @throws IllegalArgumentException Si el triplete es nulo o no tiene 3 caracteres
+     */
     public int funcionHash(String triplete) {
         if (triplete == null || triplete.length() != 3) return 0;
 
@@ -41,6 +56,14 @@ public class TablaHashADN {
     }
     
     
+    /**
+     * Inserta un triplete en la tabla hash con su posición en la secuencia.
+     * Si el triplete ya existe, incrementa su frecuencia y agrega la nueva posición.
+     * 
+     * @param triplete Cadena de 3 caracteres (A, T, C, G)
+     * @param posicion Posición en la secuencia de ADN (debe ser no negativa)
+     * @throws IllegalArgumentException Si el triplete es inválido o la posición es negativa
+     */
     public void insertar(String triplete, int posicion) {
         if (triplete == null || triplete.length() != 3) return;
 
@@ -53,6 +76,13 @@ public class TablaHashADN {
     }
 
 
+    /**
+     * Busca un triplete en la tabla hash.
+     * 
+     * @param triplete Cadena de 3 caracteres (A, T, C, G) a buscar
+     * @return NodoHash que contiene el triplete, o null si no se encuentra
+     * @throws IllegalArgumentException Si el triplete es inválido
+     */
     public NodoHash buscar(String triplete) {
         if (triplete == null || triplete.length() != 3) {
             return null;
@@ -62,6 +92,13 @@ public class TablaHashADN {
         return getTabla()[indice].buscar(triplete);
     }
     
+    /**
+     * Genera un reporte detallado de colisiones en la tabla hash.
+     * 
+     * @return String con el reporte de colisiones que incluye:
+     *         - Total de colisiones reales
+     *         - Colisiones por índice de la tabla
+     */
     public String generarReporteColisiones() {
         StringBuilder reporte = new StringBuilder();
         int colisionesReales = 0;
@@ -85,7 +122,11 @@ public class TablaHashADN {
         return reporte.toString();
     }
     
-    // Métodos adicionales para los requisitos del proyecto
+    /**
+     * Obtiene el patrón (triplete) más frecuente en la tabla hash.
+     * 
+     * @return NodoHash con el patrón más frecuente, o null si la tabla está vacía
+     */
     public NodoHash getPatronMasFrecuente() {
         NodoHash masFrecuente = null;
         for (ListaEnlazada lista : getTabla()) {
@@ -100,6 +141,11 @@ public class TablaHashADN {
         return masFrecuente;
     }
 
+    /**
+     * Obtiene el patrón (triplete) menos frecuente en la tabla hash.
+     * 
+     * @return NodoHash con el patrón menos frecuente, o null si la tabla está vacía
+     */
     public NodoHash getPatronMenosFrecuente() {
         NodoHash menosFrecuente = null;
         for (ListaEnlazada lista : getTabla()) {
@@ -116,8 +162,13 @@ public class TablaHashADN {
     
     
     /**
-     * Convierte el patrón más frecuente a una cadena descriptiva
-     * @return String con la información del patrón más frecuente
+     * Genera una representación en cadena del patrón más frecuente.
+     * 
+     * @return String con formato:
+     *         Triplete: [triplete]
+     *         Frecuencia: [frecuencia]
+     *         Aminoácido: [aminoácido correspondiente]
+     *         o "No hay patrones registrados" si la tabla está vacía
      */
     public String getPatronMasFrecuenteAsString() {
         NodoHash masFrecuente = getPatronMasFrecuente();
@@ -130,8 +181,13 @@ public class TablaHashADN {
     }
 
     /**
-     * Convierte el patrón menos frecuente a una cadena descriptiva
-     * @return String con la información del patrón menos frecuente
+     * Genera una representación en cadena del patrón menos frecuente.
+     * 
+     * @return String con formato:
+     *         Triplete: [triplete]
+     *         Frecuencia: [frecuencia]
+     *         Aminoácido: [aminoácido correspondiente]
+     *         o "No hay patrones registrados" si la tabla está vacía
      */
     public String getPatronMenosFrecuenteAsString() {
         NodoHash menosFrecuente = getPatronMenosFrecuente();
@@ -144,6 +200,11 @@ public class TablaHashADN {
     }
     
     
+    /**
+     * Construye un árbol binario de búsqueda (ABB) con los tripletes ordenados por frecuencia.
+     * 
+     * @return ArbolABB recién construido con todos los tripletes de la tabla hash
+     */
     public ArbolABB construirArbolFrecuencias() {
     ArbolABB arbol = new ArbolABB();
     
@@ -158,6 +219,11 @@ public class TablaHashADN {
     return arbol;
     }
     
+    /**
+     * Calcula el número total de tripletes únicos en la tabla hash.
+     * 
+     * @return Cantidad de tripletes distintos almacenados
+     */
     public int totalTripletesUnicos() {
         int contador = 0;
         for (int i = 0; i < getCapacidad(); i++) {
@@ -169,6 +235,11 @@ public class TablaHashADN {
         return contador;
     }
     
+    /**
+     * Obtiene una lista con todos los tripletes únicos almacenados en la tabla hash.
+     * 
+     * @return MiListaSimple conteniendo todos los tripletes únicos
+     */
     public MiListaSimple getTripletesUnicos() {
         MiListaSimple tripletes = new MiListaSimple(); 
         
@@ -184,10 +255,22 @@ public class TablaHashADN {
         return tripletes;
     }
     
+    /**
+     * Calcula el factor de carga de la tabla hash.
+     * 
+     * @return Valor entre 0 y n que representa la relación entre elementos almacenados y capacidad
+     */
     public double factorDeCarga() {
         return (double) totalTripletesUnicos() / getCapacidad();
     }
     
+    /**
+     * Determina el aminoácido correspondiente a un triplete de ADN.
+     * 
+     * @param triplete Cadena de 3 caracteres (A, T, C, G)
+     * @return Nombre del aminoácido con su abreviatura, o "Desconocido" si no es válido
+     * @throws IllegalArgumentException Si el triplete es inválido
+     */
     public String getAminoacido(String triplete) {
         String tripleteARN = triplete.replace('T', 'U');
 
@@ -216,8 +299,17 @@ public class TablaHashADN {
             default: return "Desconocido";
         }
     }
-    
-    
+
+    /**
+     * Genera un reporte completo con estadísticas de la tabla hash.
+     * 
+     * @return String con:
+     *         - Total de tripletes
+     *         - Tripletes únicos
+     *         - Factor de carga
+     *         - Patrones más/menos frecuentes
+     *         - Reporte de colisiones
+     */
     public String generarReporteCompleto() {
         StringBuilder reporte = new StringBuilder();
         int totalGeneral = 0;
@@ -249,66 +341,15 @@ public class TablaHashADN {
         return reporte.toString();
     }
 
-    public String generarReporteAminoacidos1() {
-        MiListaSimple aminoacidosUnicos = new MiListaSimple();
-        ListaEnlazada[] tripletesPorAminoacido = new ListaEnlazada[30];
 
-        // Inicializar las listas
-        for (int i = 0; i < tripletesPorAminoacido.length; i++) {
-            tripletesPorAminoacido[i] = new ListaEnlazada();
-        }
-
-        // Recorrer toda la tabla hash
-        for (int i = 0; i < getCapacidad(); i++) {
-            NodoHash actual = getTabla()[i].getCabeza();
-            while (actual != null) {
-                String triplete = actual.getTriplete();
-                String aminoacido = getAminoacido(triplete);
-
-                // Verificar si el aminoácido ya está en nuestra lista
-                if (!aminoacidosUnicos.contiene(aminoacido)) {
-                    aminoacidosUnicos.agregar(aminoacido);
-                }
-
-                // Agregar el triplete a la lista correspondiente
-                int index = aminoacidosUnicos.indiceDe(aminoacido);
-                tripletesPorAminoacido[index].insertar2(triplete, actual.getFrecuencia());
-
-                actual = actual.getpNext();
-            }
-        }
-
-        // Construir el reporte
-        StringBuilder reporte = new StringBuilder("=== REPORTE DE AMINOÁCIDOS ===\n\n");
-
-        NodoLista actualAmino = aminoacidosUnicos.getpFirst();
-        int index = 0;
-
-        while (actualAmino != null) {
-            String aminoacido = actualAmino.getTriplete();
-            reporte.append(aminoacido).append(":\n");
-
-            // Obtener los tripletes para este aminoácido
-            NodoHash actualTriplete = tripletesPorAminoacido[index].getCabeza();
-
-            if (actualTriplete == null) {
-                reporte.append("  - No hay tripletes\n");
-            } else {
-                while (actualTriplete != null) {
-                    reporte.append("  - ").append(actualTriplete.getTriplete())
-                          .append(" (Frec: ").append(actualTriplete.getFrecuencia()).append(")\n");
-                    actualTriplete = actualTriplete.getpNext();
-                }
-            }
-
-            reporte.append("\n");
-            actualAmino = actualAmino.getSiguiente();
-            index++;
-        }
-
-        return reporte.toString();
-    }
-    
+    /**
+     * Genera un reporte organizado por aminoácidos.
+     * 
+     * @return String con tabla formateada que muestra:
+     *         - Combinaciones de bases
+     *         - Información del aminoácido
+     *         - Frecuencia de cada triplete
+     */
     public String generarReporteAminoacidos() {
         StringBuilder reporte = new StringBuilder();
         reporte.append("=== REPORTE COMPLETO DE AMINOÁCIDOS ===\n\n");
@@ -342,6 +383,15 @@ public class TablaHashADN {
         return reporte.toString();
     }
     
+    /**
+     * Obtiene información detallada de un aminoácido a partir de un triplete de ARN.
+     * 
+     * @param tripleteARN Cadena de 3 caracteres (U, C, A, G)
+     * @return Arreglo de Strings con:
+     *         [0] Nombre completo del aminoácido
+     *         [1] Abreviatura de 3 letras
+     *         [2] Abreviatura de 1 letra
+     */
     private String[] getAminoacidoInfoARN(String tripleteARN) {
         switch(tripleteARN) {
             case "UUU": case "UUC": 
@@ -392,42 +442,58 @@ public class TablaHashADN {
     }
 
     /**
-     * @return the capacidad
+     * Obtiene la capacidad actual de la tabla hash.
+     * 
+     * @return Número de buckets en la tabla hash
      */
     public int getCapacidad() {
         return capacidad;
     }
 
     /**
-     * @param capacidad the capacidad to set
+     * Establece una nueva capacidad para la tabla hash.
+     * Nota: Cambiar la capacidad requiere rehashing de todos los elementos.
+     * 
+     * @param capacidad Nueva capacidad (debe ser mayor que cero)
+     * @throws IllegalArgumentException Si la capacidad es menor o igual a cero
      */
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
     }
 
     /**
-     * @return the tabla
+     * Obtiene el arreglo de listas enlazadas que representa la tabla hash.
+     * 
+     * @return Arreglo de ListaEnlazada con los buckets de la tabla hash
      */
     public ListaEnlazada[] getTabla() {
         return tabla;
     }
 
     /**
-     * @param tabla the tabla to set
+     * Establece un nuevo arreglo de listas enlazadas para la tabla hash.
+     * 
+     * @param tabla Nuevo arreglo de ListaEnlazada
+     * @throws IllegalArgumentException Si el arreglo es nulo
      */
     public void setTabla(ListaEnlazada[] tabla) {
         this.tabla = tabla;
     }
 
     /**
-     * @return the colisionesTotales
+     * Obtiene el número total de colisiones registradas.
+     * 
+     * @return Contador de colisiones totales
      */
     public int getColisionesTotales() {
         return colisionesTotales;
     }
 
     /**
-     * @param colisionesTotales the colisionesTotales to set
+     * Establece el contador de colisiones totales.
+     * 
+     * @param colisionesTotales Nuevo valor para el contador (debe ser no negativo)
+     * @throws IllegalArgumentException Si el valor es negativo
      */
     public void setColisionesTotales(int colisionesTotales) {
         this.colisionesTotales = colisionesTotales;

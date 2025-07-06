@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author ANTONY
+ * @author ANTONY CEN
  */
 public class Interfaz_2 extends javax.swing.JFrame {
     
@@ -159,7 +159,7 @@ public class Interfaz_2 extends javax.swing.JFrame {
                 butonMasFrecuenteActionPerformed(evt);
             }
         });
-        jPanel1.add(butonMasFrecuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 170, 30));
+        jPanel1.add(butonMasFrecuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 190, 30));
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -174,7 +174,7 @@ public class Interfaz_2 extends javax.swing.JFrame {
                 botonMenosFrecuenteActionPerformed(evt);
             }
         });
-        jPanel1.add(botonMenosFrecuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 170, 30));
+        jPanel1.add(botonMenosFrecuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 190, 30));
 
         ReporteAminoácidos.setBackground(new java.awt.Color(0, 204, 255));
         ReporteAminoácidos.setForeground(new java.awt.Color(0, 0, 0));
@@ -216,14 +216,14 @@ public class Interfaz_2 extends javax.swing.JFrame {
         MenosFrecuente.setRows(5);
         jScrollPane3.setViewportView(MenosFrecuente);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 170, 80));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 190, 80));
 
         MasFrecuente.setBackground(java.awt.Color.white);
         MasFrecuente.setColumns(20);
         MasFrecuente.setRows(5);
         jScrollPane4.setViewportView(MasFrecuente);
 
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 170, 80));
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 190, 80));
 
         jTextArea1.setBackground(java.awt.Color.white);
         jTextArea1.setColumns(20);

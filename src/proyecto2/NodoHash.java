@@ -5,8 +5,10 @@
 package proyecto2;
 
 /**
- *
- * @author ANTONY
+ * Implementación de un nodo para una tabla hash que almacena información
+ * sobre tripletes de ADN, incluyendo su frecuencia y posiciones en la secuencia.
+ * 
+ * @author ANTONY CEN
  */
 public class NodoHash {
     private String triplete;
@@ -14,6 +16,12 @@ public class NodoHash {
     private ListaPosiciones posiciones;
     private NodoHash pNext;
 
+    /**
+     * Constructor que inicializa un nodo con un triplete y su posición inicial.
+     * 
+     * @param triplete Cadena de 3 caracteres (A,T,C,G)
+     * @param posicion Posición inicial donde aparece el triplete
+     */
     public NodoHash(String triplete, int posicion) {
         this.triplete = triplete;
         this.frecuencia = 1;
@@ -22,61 +30,82 @@ public class NodoHash {
         this.pNext = null;
     }
     
+    /**
+     * Obtiene las posiciones del triplete como una cadena formateada.
+     * 
+     * @return Cadena con las posiciones separadas por comas
+     */
     public String getPosicion_to_String(){
         return posiciones.toString();
     }
 
     /**
-     * @return the triplete
+     * Obtiene el triplete almacenado en este nodo.
+     * 
+     * @return Cadena de 3 caracteres (A,T,C,G)
      */
     public String getTriplete() {
         return triplete;
     }
 
     /**
-     * @param triplete the triplete to set
+     * Establece el triplete para este nodo.
+     * 
+     * @param triplete Nueva cadena de 3 caracteres (A,T,C,G)
      */
     public void setTriplete(String triplete) {
         this.triplete = triplete;
     }
 
     /**
-     * @return the frecuencia
+     * Obtiene la frecuencia del triplete.
+     * 
+     * @return Número de veces que aparece el triplete
      */
     public int getFrecuencia() {
         return frecuencia;
     }
 
     /**
-     * @param frecuencia the frecuencia to set
+     * Establece la frecuencia del triplete.
+     * 
+     * @param frecuencia Nueva frecuencia del triplete
      */
     public void setFrecuencia(int frecuencia) {
         this.frecuencia = frecuencia;
     }
 
     /**
-     * @return the posiciones
+     * Obtiene la lista de posiciones donde aparece el triplete.
+     * 
+     * @return Lista de posiciones
      */
     public ListaPosiciones getPosiciones() {
         return posiciones;
     }
 
     /**
-     * @param posiciones the posiciones to set
+     * Establece la lista de posiciones para este triplete.
+     * 
+     * @param posiciones Nueva lista de posiciones
      */
     public void setPosiciones(ListaPosiciones posiciones) {
         this.posiciones = posiciones;
     }
 
     /**
-     * @return the pNext
+     * Obtiene el siguiente nodo en la lista enlazada.
+     * 
+     * @return Siguiente nodo o {@code null} si es el último
      */
     public NodoHash getpNext() {
         return pNext;
     }
 
     /**
-     * @param pNext the pNext to set
+     * Establece el siguiente nodo en la lista enlazada.
+     * 
+     * @param pNext Nuevo nodo siguiente
      */
     public void setpNext(NodoHash pNext) {
         this.pNext = pNext;

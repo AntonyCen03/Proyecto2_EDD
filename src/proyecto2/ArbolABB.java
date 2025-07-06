@@ -5,24 +5,46 @@
 package proyecto2;
 
 /**
- *
- * @author ANTONY
+ * Implementación de un árbol binario de búsqueda (ABB) que almacena nodos de tipo {@link NodoHash}.
+ * El árbol está ordenado principalmente por la frecuencia de los nodos, y en caso de frecuencias iguales,
+ * se mantienen como nodos distintos que pueden ser buscados por su triplete.
+ * 
+ * @author ANTONY CEN
  */
 public class ArbolABB {
     private NodoABB Root;
 
+    /**
+     * Constructor que inicializa un árbol vacío.
+     */
     public ArbolABB() {
         this.Root=null;
     }
     
+    /**
+     * Verifica si un nodo es nulo.
+     * 
+     * @param node Nodo a verificar
+     * @return {@code true} si el nodo es nulo, {@code false} en caso contrario
+     */
     public boolean EsVacio(NodoABB node){
         return node==null;
     }
     
+    /**
+     * Vacía el árbol eliminando todas las referencias a nodos.
+     */
     public void Vaciar(){
         this.setRoot(null);
     }
     
+    /**
+     * Recorre el árbol en preorden (raíz, izquierdo, derecho) y construye una cadena con los datos.
+     * 
+     * @param root Nodo raíz del subárbol a recorrer
+     * @param cadena Cadena acumuladora para el resultado
+     * @return Cadena con los datos de los nodos en preorden separados por comas
+     */
     public String PreOrden(NodoABB root, String cadena){
         if (root!=null) {
             cadena += root.getDato()+",";
@@ -32,6 +54,13 @@ public class ArbolABB {
         return cadena;
     }
     
+    /**
+     * Recorre el árbol en posorden (izquierdo, derecho, raíz) y construye una cadena con los datos.
+     * 
+     * @param root Nodo raíz del subárbol a recorrer
+     * @param cadena Cadena acumuladora para el resultado
+     * @return Cadena con los datos de los nodos en posorden separados por comas
+     */
     public String PosOrden(NodoABB root, String cadena){
         if (root!=null) {
             cadena=PosOrden(root.getHijoIzq(), cadena);
@@ -41,6 +70,13 @@ public class ArbolABB {
         return cadena;
     }
     
+    /**
+     * Recorre el árbol en inorden (izquierdo, raíz, derecho) y construye una cadena con los datos.
+     * 
+     * @param root Nodo raíz del subárbol a recorrer
+     * @param cadena Cadena acumuladora para el resultado
+     * @return Cadena con los datos de los nodos en inorden separados por comas
+     */
     public String InOrden(NodoABB root, String cadena){
         if (root!=null) {
             cadena=InOrden(root.getHijoIzq(),cadena);
@@ -50,6 +86,14 @@ public class ArbolABB {
         return cadena;
     }
     
+    /**
+     * Busca un nodo en el árbol que contenga un {@link NodoHash} específico.
+     * La búsqueda considera primero la frecuencia y luego el triplete en caso de colisiones.
+     * 
+     * @param valor NodoHash a buscar
+     * @param root Nodo raíz del subárbol donde se realiza la búsqueda
+     * @return El nodo encontrado o {@code null} si no existe
+     */
     public NodoABB Buscar(NodoHash valor, NodoABB root) {
         if (this.EsVacio(root)) {
             return null;
@@ -75,6 +119,14 @@ public class ArbolABB {
         }
     }
     
+    /**
+     * Busca un nodo en el árbol por su triplete asociado.
+     * Recorre todo el árbol (no optimizado por frecuencia).
+     * 
+     * @param triplete Cadena del triplete a buscar
+     * @param root Nodo raíz del subárbol donde se realiza la búsqueda
+     * @return El nodo encontrado o {@code null} si no existe
+     */
     public NodoABB buscarPorTriplete(String triplete, NodoABB root) {
         if (this.EsVacio(root)) {
             return null;
@@ -95,7 +147,12 @@ public class ArbolABB {
         return buscarPorTriplete(triplete, root.getHijoDer());
     }
     
-    // Modificar el método de inserción para comparar frecuencias
+    /**
+     * Inserta un nuevo {@link NodoHash} en el árbol manteniendo el orden por frecuencia.
+     * 
+     * @param valor NodoHash a insertar
+     * @return El nodo recién insertado
+     */
     public NodoABB Insertar(NodoHash valor) {
         NodoABB nuevoNodo = new NodoABB(valor);
     
@@ -126,11 +183,22 @@ public class ArbolABB {
         return nuevoNodo;
     }
 
-    // Método para obtener patrones ordenados por frecuencia
+    /**
+     * Genera una representación en cadena de los patrones ordenados por frecuencia (inorden).
+     * 
+     * @return Cadena con formato "triplete - Frecuencia: X" para cada nodo, ordenados ascendentemente por frecuencia
+     */
     public String inOrdenFrecuencias() {
         return InOrden(this.getRoot(), new StringBuilder()).toString();
     }
 
+    /**
+     * Método auxiliar para recorrido inorden que construye la cadena de frecuencias.
+     * 
+     * @param root Nodo raíz del subárbol
+     * @param sb StringBuilder acumulador para el resultado
+     * @return StringBuilder con la representación de los nodos
+     */
     private StringBuilder InOrden(NodoABB root, StringBuilder sb) {
         if (root != null) {
             InOrden(root.getHijoIzq(), sb);
@@ -144,7 +212,11 @@ public class ArbolABB {
         return sb;
     }
 
-    // Método para encontrar el patrón más frecuente (el máximo en BST)
+    /**
+     * Obtiene el patrón (NodoHash) con la frecuencia más alta en el árbol.
+     * 
+     * @return NodoHash con mayor frecuencia o {@code null} si el árbol está vacío
+     */
     public NodoHash getPatronMasFrecuente() {
         if (this.getRoot() == null) return null;
         
@@ -155,7 +227,11 @@ public class ArbolABB {
         return actual.getDato();
     }
 
-    // Método para encontrar el patrón menos frecuente (el mínimo en BST)
+    /**
+     * Obtiene el patrón (NodoHash) con la frecuencia más baja en el árbol.
+     * 
+     * @return NodoHash con menor frecuencia o {@code null} si el árbol está vacío
+     */
     public NodoHash getPatronMenosFrecuente() {
         if (this.getRoot() == null) return null;
         
@@ -167,14 +243,18 @@ public class ArbolABB {
     }
 
     /**
-     * @return the Root
+     * Obtiene la raíz del árbol.
+     * 
+     * @return Nodo raíz del árbol
      */
     public NodoABB getRoot() {
         return Root;
     }
 
     /**
-     * @param Root the Root to set
+     * Establece una nueva raíz para el árbol.
+     * 
+     * @param Root Nueva raíz del árbol
      */
     public void setRoot(NodoABB Root) {
         this.Root = Root;

@@ -5,60 +5,77 @@
 package proyecto2;
 
 /**
- *
- * @author ANTONY
+ * Implementación de un nodo para una lista enlazada simple que almacena
+ * tripletes de ADN y su frecuencia de aparición.
+ * 
+ * @author ANTONY CEN
  */
 public class NodoLista {
     private String triplete;
     private int frecuencia;
     private NodoLista siguiente;
 
+    /**
+    * Implementación de un nodo para una lista enlazada simple que almacena
+    * tripletes de ADN y su frecuencia de aparición.
+    * 
+    * @author ANTONY
+    */
     public NodoLista(String triplete) {
         this.triplete = triplete;
         this.frecuencia = 1;
         this.siguiente = null;
     }
-    
-    
-    
 
     /**
-     * @return the triplete
+     * Obtiene el triplete almacenado en este nodo.
+     * 
+     * @return Cadena de 3 caracteres (A,T,C,G)
      */
     public String getTriplete() {
         return triplete;
     }
 
     /**
-     * @param triplete the triplete to set
+     * Establece el triplete para este nodo.
+     * 
+     * @param triplete Nueva cadena de 3 caracteres (A,T,C,G)
      */
     public void setTriplete(String triplete) {
         this.triplete = triplete;
     }
 
     /**
-     * @return the frecuencia
+     * Obtiene la frecuencia del triplete.
+     * 
+     * @return Número de veces que aparece el triplete
      */
     public int getFrecuencia() {
         return frecuencia;
     }
 
     /**
-     * @param frecuencia the frecuencia to set
+     * Establece la frecuencia del triplete.
+     * 
+     * @param frecuencia Nueva frecuencia del triplete
      */
     public void setFrecuencia(int frecuencia) {
         this.frecuencia = frecuencia;
     }
 
     /**
-     * @return the siguiente
+     * Obtiene el siguiente nodo en la lista enlazada.
+     * 
+     * @return Siguiente nodo o {@code null} si es el último
      */
     public NodoLista getSiguiente() {
         return siguiente;
     }
 
     /**
-     * @param siguiente the siguiente to set
+     * Establece el siguiente nodo en la lista enlazada.
+     * 
+     * @param siguiente Nuevo nodo siguiente
      */
     public void setSiguiente(NodoLista siguiente) {
         this.siguiente = siguiente;

@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author ANTONY
+ * @author ANTONY CEN
  */
 public class Interfaz_1 extends javax.swing.JFrame {
     
@@ -84,6 +84,9 @@ public class Interfaz_1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarArchivoActionPerformed
+        JOptionPane.showMessageDialog(this, "Para iniciar el programa debe cagar\n"
+                + " un archivo llamado 'secuencia.txt'. \n"
+                + " Esta en la carpeta Proyecto2.");
         JFileChooser file= new JFileChooser();
         file.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int resultado = file.showOpenDialog(this);
@@ -128,9 +131,7 @@ public class Interfaz_1 extends javax.swing.JFrame {
                            triletesConComas.append(",");
                        }
                    }
-                   System.out.println(triletesConComas);
-                   
-                 
+
                  // 2. Inicializar la tabla hash 
                 tablaHash = new TablaHashADN(101);
                  
@@ -140,8 +141,6 @@ public class Interfaz_1 extends javax.swing.JFrame {
                     tablaHash.insertar(triplete, i);
 
                 }
-                
-                System.out.println("Tripletes insertados. Total único según hash: " + tablaHash.totalTripletesUnicos());
                 
                 // 4. Construir el árbol binario con las frecuencias
                 arbolFrecuencias = tablaHash.construirArbolFrecuencias();
