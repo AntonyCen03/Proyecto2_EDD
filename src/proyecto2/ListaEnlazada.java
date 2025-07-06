@@ -22,25 +22,6 @@ public class ListaEnlazada {
     }
 
     
-//    public void insertar(String triplete, int posicion){
-//        NodoHash actual=getCabeza();
-//        while (actual != null){
-//            if (actual.getTriplete().equals(triplete)) {
-//                actual.setFrecuencia(actual.getFrecuencia()+1);
-//                actual.getPosiciones().agregar(posicion);
-//                return;
-//            }
-//            actual=actual.getpNext();
-//        }
-//        
-//        //Si no existe agregar nuevo nodo
-//        NodoHash nuevo=new NodoHash(triplete, posicion);
-//        nuevo.setpNext(getCabeza());
-//        setCabeza(nuevo);
-//        size++;
-//        
-//    }
-    
     public boolean insertar(String triplete, int posicion) {
         NodoHash actual = getCabeza();
         while (actual != null) {
@@ -52,7 +33,6 @@ public class ListaEnlazada {
             actual = actual.getpNext();
         }
 
-        // Si no existe, agregar nuevo nodo
         NodoHash nuevo = new NodoHash(triplete, posicion);
         nuevo.setpNext(getCabeza());
         setCabeza(nuevo);

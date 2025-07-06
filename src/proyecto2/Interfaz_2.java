@@ -4,6 +4,8 @@
  */
 package proyecto2;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ANTONY
@@ -58,12 +60,12 @@ public class Interfaz_2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator2 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         patrones = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         Buscar = new javax.swing.JButton();
-        posiciones = new javax.swing.JTextField();
         triplete = new javax.swing.JTextField();
         frecuencia = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -71,26 +73,41 @@ public class Interfaz_2 extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         butonMasFrecuente = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        MenosFrecuencias = new javax.swing.JLabel();
         botonMenosFrecuente = new javax.swing.JButton();
-        MasFrecuencias = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         ReporteAminoácidos = new javax.swing.JButton();
         ReporteColiciones = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        MenosFrecuente = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        MasFrecuente = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        posiciones = new javax.swing.JTextArea();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(java.awt.Color.lightGray);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Búsqueda de Patrones");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 140, 30));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 230, 30));
 
+        patrones.setBackground(java.awt.Color.white);
+        patrones.setForeground(new java.awt.Color(0, 0, 0));
         patrones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         patrones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,9 +116,12 @@ public class Interfaz_2 extends javax.swing.JFrame {
         });
         jPanel1.add(patrones, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 110, -1));
 
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Seleccione un patrón:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 130, 20));
 
+        Buscar.setBackground(new java.awt.Color(0, 204, 255));
+        Buscar.setForeground(new java.awt.Color(0, 0, 0));
         Buscar.setText("Buscar");
         Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,22 +129,30 @@ public class Interfaz_2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 90, -1));
-        jPanel1.add(posiciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 140, 270, 20));
-        jPanel1.add(triplete, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 230, 20));
-        jPanel1.add(frecuencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 230, 20));
 
+        triplete.setBackground(java.awt.Color.white);
+        jPanel1.add(triplete, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 80, 20));
+
+        frecuencia.setBackground(java.awt.Color.white);
+        jPanel1.add(frecuencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 80, 20));
+
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Triplete");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 230, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 90, -1));
 
+        Frecuencia1.setForeground(new java.awt.Color(0, 0, 0));
         Frecuencia1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Frecuencia1.setText("Frecuencia");
-        jPanel1.add(Frecuencia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 230, -1));
+        jPanel1.add(Frecuencia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 80, -1));
 
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Posiciones");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 120, 270, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 150, -1));
 
+        butonMasFrecuente.setBackground(new java.awt.Color(0, 204, 255));
+        butonMasFrecuente.setForeground(new java.awt.Color(0, 0, 0));
         butonMasFrecuente.setText("Patrón mas frecuente");
         butonMasFrecuente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,25 +161,23 @@ public class Interfaz_2 extends javax.swing.JFrame {
         });
         jPanel1.add(butonMasFrecuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 170, 30));
 
+        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Frecuencias");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 187, 160, 20));
-        jPanel1.add(MenosFrecuencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 170, 40));
 
+        botonMenosFrecuente.setBackground(new java.awt.Color(51, 204, 255));
+        botonMenosFrecuente.setForeground(new java.awt.Color(0, 0, 0));
         botonMenosFrecuente.setText("Patrón menos frecuente");
         botonMenosFrecuente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonMenosFrecuenteActionPerformed(evt);
             }
         });
-        jPanel1.add(botonMenosFrecuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 170, 30));
-        jPanel1.add(MasFrecuencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 170, 40));
+        jPanel1.add(botonMenosFrecuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 170, 30));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, 240, 190));
-
+        ReporteAminoácidos.setBackground(new java.awt.Color(0, 204, 255));
+        ReporteAminoácidos.setForeground(new java.awt.Color(0, 0, 0));
         ReporteAminoácidos.setText("Generar Reporte");
         ReporteAminoácidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,6 +186,8 @@ public class Interfaz_2 extends javax.swing.JFrame {
         });
         jPanel1.add(ReporteAminoácidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, 240, -1));
 
+        ReporteColiciones.setBackground(new java.awt.Color(51, 204, 255));
+        ReporteColiciones.setForeground(new java.awt.Color(0, 0, 0));
         ReporteColiciones.setText("Generar Reporte");
         ReporteColiciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,25 +196,86 @@ public class Interfaz_2 extends javax.swing.JFrame {
         });
         jPanel1.add(ReporteColiciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 240, -1));
 
+        jTextArea2.setBackground(java.awt.Color.white);
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 240, 190));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 240, 260));
 
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Reporte de Aminoácidos");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 240, -1));
 
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Reporte de Colisiones");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 240, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 480));
+        MenosFrecuente.setBackground(java.awt.Color.white);
+        MenosFrecuente.setColumns(20);
+        MenosFrecuente.setRows(5);
+        jScrollPane3.setViewportView(MenosFrecuente);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 170, 80));
+
+        MasFrecuente.setBackground(java.awt.Color.white);
+        MasFrecuente.setColumns(20);
+        MasFrecuente.setRows(5);
+        jScrollPane4.setViewportView(MasFrecuente);
+
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 170, 80));
+
+        jTextArea1.setBackground(java.awt.Color.white);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, 460, 260));
+
+        posiciones.setBackground(java.awt.Color.white);
+        posiciones.setColumns(20);
+        posiciones.setRows(5);
+        jScrollPane5.setViewportView(posiciones);
+
+        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 830, 60));
+
+        jSeparator1.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 970, 10));
+
+        jSeparator3.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 970, 10));
+
+        jSeparator4.setBackground(new java.awt.Color(204, 255, 255));
+        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 10, 460));
+
+        jSeparator5.setBackground(new java.awt.Color(204, 255, 255));
+        jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 50, 10, 460));
+
+        jSeparator6.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 970, 10));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 530));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         // TODO add your handling code here:
+        
+        String tripleteSelecionado = (String) patrones.getSelectedItem();
+        if (tripleteSelecionado!=null) {
+            NodoHash nodo= tablaHash.buscar(tripleteSelecionado);
+            if (nodo!=null) {
+                triplete.setText(nodo.getTriplete());
+                frecuencia.setText(Integer.toString(nodo.getFrecuencia()));
+                posiciones.setText(nodo.getPosicion_to_String());
+            }else{
+                JOptionPane.showMessageDialog(this, "El trplete selecionado no existe", "Error", HEIGHT);
+            }
+        }
+        
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void patronesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patronesActionPerformed
@@ -195,18 +284,23 @@ public class Interfaz_2 extends javax.swing.JFrame {
 
     private void butonMasFrecuenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butonMasFrecuenteActionPerformed
         // TODO add your handling code here:
+        MasFrecuente.setText(tablaHash.getPatronMasFrecuenteAsString());
     }//GEN-LAST:event_butonMasFrecuenteActionPerformed
 
     private void botonMenosFrecuenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMenosFrecuenteActionPerformed
         // TODO add your handling code here:
+        MenosFrecuente.setText(tablaHash.getPatronMenosFrecuenteAsString());
     }//GEN-LAST:event_botonMenosFrecuenteActionPerformed
 
     private void ReporteColicionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteColicionesActionPerformed
         // TODO add your handling code here:
+        jTextArea2.setText(tablaHash.generarReporteColisiones());
     }//GEN-LAST:event_ReporteColicionesActionPerformed
 
     private void ReporteAminoácidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteAminoácidosActionPerformed
         // TODO add your handling code here:
+        jTextArea1.setText(tablaHash.generarReporteAminoacidos());
+        
     }//GEN-LAST:event_ReporteAminoácidosActionPerformed
 
     /**
@@ -237,8 +331,8 @@ public class Interfaz_2 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buscar;
     private javax.swing.JLabel Frecuencia1;
-    private javax.swing.JLabel MasFrecuencias;
-    private javax.swing.JLabel MenosFrecuencias;
+    private javax.swing.JTextArea MasFrecuente;
+    private javax.swing.JTextArea MenosFrecuente;
     private javax.swing.JButton ReporteAminoácidos;
     private javax.swing.JButton ReporteColiciones;
     private javax.swing.JButton botonMenosFrecuente;
@@ -254,10 +348,19 @@ public class Interfaz_2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JComboBox<String> patrones;
-    private javax.swing.JTextField posiciones;
+    private javax.swing.JTextArea posiciones;
     private javax.swing.JTextField triplete;
     // End of variables declaration//GEN-END:variables
 }

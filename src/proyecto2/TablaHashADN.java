@@ -41,23 +41,6 @@ public class TablaHashADN {
     }
     
     
-    
-//    public void insertar(String triplete, int posicion) {
-//        if (triplete == null || triplete.length() != 3) {  
-//            System.out.println("Triplete inválido: " + triplete); 
-//            return;
-//        }
-//
-//        int indice = funcionHash(triplete);
-//        System.out.println("Insertando: " + triplete + " en índice: " + indice); 
-//
-//        if (!tabla[indice].EsVacio()) {
-//            setColisionesTotales(getColisionesTotales() + 1);
-//        }
-//
-//        getTabla()[indice].insertar(triplete, posicion);
-//    }
-    
     public void insertar(String triplete, int posicion) {
         if (triplete == null || triplete.length() != 3) return;
 
@@ -131,6 +114,36 @@ public class TablaHashADN {
         return menosFrecuente;
     }
     
+    
+    /**
+     * Convierte el patrón más frecuente a una cadena descriptiva
+     * @return String con la información del patrón más frecuente
+     */
+    public String getPatronMasFrecuenteAsString() {
+        NodoHash masFrecuente = getPatronMasFrecuente();
+        if (masFrecuente == null) {
+            return "No hay patrones registrados";
+        }
+        return "Triplete: " + masFrecuente.getTriplete() + "\n"+
+               "Frecuencia: " + masFrecuente.getFrecuencia() + "\n"+
+               "Aminoácido: " + getAminoacido(masFrecuente.getTriplete());
+    }
+
+    /**
+     * Convierte el patrón menos frecuente a una cadena descriptiva
+     * @return String con la información del patrón menos frecuente
+     */
+    public String getPatronMenosFrecuenteAsString() {
+        NodoHash menosFrecuente = getPatronMenosFrecuente();
+        if (menosFrecuente == null) {
+            return "No hay patrones registrados";
+        }
+        return "Triplete: " + menosFrecuente.getTriplete() + "\n"+
+               "Frecuencia: " + menosFrecuente.getFrecuencia() + "\n"+
+               "Aminoácido: " + getAminoacido(menosFrecuente.getTriplete());
+    }
+    
+    
     public ArbolABB construirArbolFrecuencias() {
     ArbolABB arbol = new ArbolABB();
     
@@ -151,12 +164,8 @@ public class TablaHashADN {
             if (getTabla()[i] != null) {
                 int size = getTabla()[i].getSize();
                 contador += size;
-//                if (size > 0) {
-//                    System.out.println("Índice " + i + " tiene " + size + " elementos");
-//                }
             }
         }
-        //System.out.println("Total de tripletes únicos: " + contador); 
         return contador;
     }
     
@@ -208,6 +217,7 @@ public class TablaHashADN {
         }
     }
     
+    
     public String generarReporteCompleto() {
         StringBuilder reporte = new StringBuilder();
         int totalGeneral = 0;
@@ -239,7 +249,7 @@ public class TablaHashADN {
         return reporte.toString();
     }
 
-    public String generarReporteAminoacidos() {
+    public String generarReporteAminoacidos1() {
         MiListaSimple aminoacidosUnicos = new MiListaSimple();
         ListaEnlazada[] tripletesPorAminoacido = new ListaEnlazada[30];
 
@@ -297,6 +307,88 @@ public class TablaHashADN {
         }
 
         return reporte.toString();
+    }
+    
+    public String generarReporteAminoacidos() {
+        StringBuilder reporte = new StringBuilder();
+        reporte.append("=== REPORTE COMPLETO DE AMINOÁCIDOS ===\n\n");
+        reporte.append(String.format("%-12s %-12s %-12s %-25s %-15s %-15s %-10s\n", 
+            "Primera Base", "Segunda Base", "Tercera Base", "Aminoácido", "Abrev (3 letras)", "Abrev (1 letra)", "Frecuencia"));
+        reporte.append("------------------------------------------------------------------------------------------------\n");
+
+        char[] bases = {'U', 'C', 'A', 'G'};
+        for (char base1 : bases) {
+            for (char base2 : bases) {
+                for (char base3 : bases) {
+                    String tripleteARN = "" + base1 + base2 + base3;
+                    String tripleteADN = tripleteARN.replace('U', 'T');
+
+                    // Obtener información del aminoácido
+                    String[] aminoInfo = getAminoacidoInfoARN(tripleteARN);
+                    String nombreAmino = aminoInfo[0];
+                    String abrev3 = aminoInfo[1];
+                    String abrev1 = aminoInfo[2];
+
+                    // Obtener frecuencia desde la tabla hash
+                    NodoHash nodo = buscar(tripleteADN);
+                    int frecuencia = (nodo != null) ? nodo.getFrecuencia() : 0;
+
+                    reporte.append(String.format("%-12s %-12s %-12s %-25s %-15s %-15s %-10d\n", 
+                        base1, base2, base3, nombreAmino, abrev3, abrev1, frecuencia));
+                }
+            }
+        }
+
+        return reporte.toString();
+    }
+    
+    private String[] getAminoacidoInfoARN(String tripleteARN) {
+        switch(tripleteARN) {
+            case "UUU": case "UUC": 
+                return new String[]{"Fenilalanina", "Phe", "F"};
+            case "UUA": case "UUG": case "CUU": case "CUC": case "CUA": case "CUG": 
+                return new String[]{"Leucina", "Leu", "L"};
+            case "UCU": case "UCC": case "UCA": case "UCG": case "AGU": case "AGC": 
+                return new String[]{"Serina", "Ser", "S"};
+            case "UAU": case "UAC": 
+                return new String[]{"Tirosina", "Tyr", "Y"};
+            case "UAA": case "UAG": case "UGA": 
+                return new String[]{"STOP", "-", "-"};
+            case "UGU": case "UGC": 
+                return new String[]{"Cisteína", "Cys", "C"};
+            case "UGG": 
+                return new String[]{"Triptófano", "Trp", "W"};
+            case "CCU": case "CCC": case "CCA": case "CCG": 
+                return new String[]{"Prolina", "Pro", "P"};
+            case "CAU": case "CAC": 
+                return new String[]{"Histidina", "His", "H"};
+            case "CAA": case "CAG": 
+                return new String[]{"Glutamina", "Gln", "Q"};
+            case "CGU": case "CGC": case "CGA": case "CGG": case "AGA": case "AGG": 
+                return new String[]{"Arginina", "Arg", "R"};
+            case "AUU": case "AUC": case "AUA": 
+                return new String[]{"Isoleucina", "Ile", "I"};
+            case "AUG": 
+                return new String[]{"Metionina (Inicio)", "Met", "M"};
+            case "ACU": case "ACC": case "ACA": case "ACG": 
+                return new String[]{"Treonina", "Thr", "T"};
+            case "AAU": case "AAC": 
+                return new String[]{"Asparagina", "Asn", "N"};
+            case "AAA": case "AAG": 
+                return new String[]{"Lisina", "Lys", "K"};
+            case "GUU": case "GUC": case "GUA": case "GUG": 
+                return new String[]{"Valina", "Val", "V"};
+            case "GCU": case "GCC": case "GCA": case "GCG": 
+                return new String[]{"Alanina", "Ala", "A"};
+            case "GAU": case "GAC": 
+                return new String[]{"Ácido Aspártico", "Asp", "D"};
+            case "GAA": case "GAG": 
+                return new String[]{"Ácido Glutámico", "Glu", "E"};
+            case "GGU": case "GGC": case "GGA": case "GGG": 
+                return new String[]{"Glicina", "Gly", "G"};
+            default: 
+                return new String[]{"Desconocido", "???", "?"};
+        }
     }
 
     /**

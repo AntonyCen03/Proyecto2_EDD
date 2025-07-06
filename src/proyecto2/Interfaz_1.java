@@ -40,11 +40,17 @@ public class Interfaz_1 extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         CargarArchivo = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        CargarArchivo.setBackground(new java.awt.Color(51, 204, 255));
+        CargarArchivo.setForeground(new java.awt.Color(0, 0, 0));
         CargarArchivo.setText("Cargar Archivo");
         CargarArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,6 +58,16 @@ public class Interfaz_1 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(CargarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 130, 40));
+
+        jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Antony Cen");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 310, 90, 20));
+
+        jLabel2.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Integrante:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, 110, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,8 +113,6 @@ public class Interfaz_1 extends javax.swing.JFrame {
                     secuenciaCompleta.append(textoValido);
 
                 }
-                    //System.out.println(secuenciaCompleta);
-                    
                  
                  //Procesar la secuencia completa
                 String secuenciaADN = secuenciaCompleta.toString();
@@ -109,28 +123,22 @@ public class Interfaz_1 extends javax.swing.JFrame {
                    for (int i = 0; i <= secuenciaADN.length() -3 ; i+=3) {
                        String triplete= secuenciaADN.substring(i,i+3);
                        triletesConComas.append(triplete);
-
                        // Agregar coma si no es el último triplete
                        if (i < secuenciaADN.length() -3) {
                            triletesConComas.append(",");
                        }
-
                    }
                    System.out.println(triletesConComas);
                    
                  
-                 // 2. Inicializar la tabla hash (tamaño primo recomendado)
+                 // 2. Inicializar la tabla hash 
                 tablaHash = new TablaHashADN(101);
                  
                  // 3. Procesar la secuencia e insertar en tabla hash
-                for (int i = 0; i <= secuenciaADN.length() - 3; i++) {  // Mantener i++ para procesar todos los tripletes
+                for (int i = 0; i <= secuenciaADN.length() - 3; i++) {  
                     String triplete = secuenciaADN.substring(i, i + 3);
                     tablaHash.insertar(triplete, i);
 
-                    // Opcional: mostrar los primeros 10 tripletes para depuración
-                    if (i < 30) {  // Muestra los primeros 10 tripletes (0-9)
-                        System.out.println("Triplete " + (i/3 + 1) + ": " + triplete);
-                    }
                 }
                 
                 System.out.println("Tripletes insertados. Total único según hash: " + tablaHash.totalTripletesUnicos());
@@ -142,9 +150,6 @@ public class Interfaz_1 extends javax.swing.JFrame {
                 ventana2.show();
                 ventana2.setLocationRelativeTo(null);
                 
-                JOptionPane.showMessageDialog(this, 
-                    tablaHash.generarReporteCompleto(),
-                    "Proceso Completado", JOptionPane.INFORMATION_MESSAGE);
                     
                 }catch(IOException e){
                 JOptionPane.showMessageDialog(this, "Error al leer el archivo"+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -189,6 +194,8 @@ public class Interfaz_1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CargarArchivo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

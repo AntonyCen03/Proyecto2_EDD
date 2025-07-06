@@ -63,7 +63,7 @@ public class ListaPosiciones {
         }
         NodoPosicion actual = cabeza;
         for (int i = 0; i < indice; i++) {
-            actual = actual.getSiguiente(); // Corregir: faltaba asignación
+            actual = actual.getSiguiente(); 
         }
         return actual.getPosicion();
     }
@@ -80,7 +80,7 @@ public class ListaPosiciones {
         while(actual!=null){
             sb.append(actual.getPosicion());
             if (actual.getSiguiente()!=null) {
-                sb.append(", ");
+                sb.append(",");
             }
             actual=actual.getSiguiente();
         }
