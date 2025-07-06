@@ -110,5 +110,3 @@ Aminoácidos
 
 📅 Versión: 1.0
 
-
-
