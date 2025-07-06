@@ -13,8 +13,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Clase principal que representa la primera interfaz gráfica del sistema.
+ * Permite cargar un archivo de texto con secuencias de ADN y procesarlo para
+ * generar una tabla hash y un árbol de frecuencias.
+ * 
  * @author ANTONY CEN
+ * @version 1.0
  */
 public class Interfaz_1 extends javax.swing.JFrame {
     
@@ -83,10 +87,16 @@ public class Interfaz_1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que se ejecuta al hacer clic en el botón "Cargar Archivo".
+     * Permite seleccionar un archivo de texto con secuencias de ADN, validar su contenido
+     * y procesarlo para generar las estructuras de datos necesarias.
+     * 
+     * @param evt Evento de acción generado por el botón
+     */
     private void CargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarArchivoActionPerformed
-        JOptionPane.showMessageDialog(this, "Para iniciar el programa debe cagar\n"
-                + " un archivo llamado 'secuencia.txt'. \n"
-                + " Esta en la carpeta Proyecto2.");
+        JOptionPane.showMessageDialog(this, "Para iniciar el programa debe cagar"
+                + " un archivo llamado 'secuencia.txt'.");
         JFileChooser file= new JFileChooser();
         file.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int resultado = file.showOpenDialog(this);

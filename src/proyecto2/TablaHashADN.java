@@ -34,6 +34,15 @@ public class TablaHashADN {
     }
     
     /**
+     * Verificar si la TablaHashADN esta vacio
+     * 
+     * @return {@code true} si la TablaHashADN está vacía, {@code false} en caso contrario
+     */
+    public boolean EsVacio(){
+        return this.capacidad==0;
+    }
+    
+    /**
      * Calcula el índice hash para un triplete de ADN.
      * 
      * @param triplete Cadena de 3 caracteres (A, T, C, G)

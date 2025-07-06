@@ -7,8 +7,12 @@ package proyecto2;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Clase que representa la segunda interfaz gráfica del sistema.
+ * Permite realizar búsquedas de patrones en la secuencia de ADN cargada,
+ * mostrar frecuencias y generar reportes.
+ * 
  * @author ANTONY CEN
+ * @version 1.0
  */
 public class Interfaz_2 extends javax.swing.JFrame {
     
@@ -17,7 +21,10 @@ public class Interfaz_2 extends javax.swing.JFrame {
     private ArbolABB arbolFrecuencias;
     
     /**
-     * Creates new form Interfaz_2
+     * Constructor que inicializa la interfaz con las estructuras de datos procesadas.
+     * 
+     * @param tablaHash Tabla hash con los tripletes de ADN y sus posiciones
+     * @param arbolFrecuencias Árbol binario con las frecuencias de los tripletes
      */
     public Interfaz_2(TablaHashADN tablaHash, ArbolABB arbolFrecuencias) {
         this.tablaHash =tablaHash;
@@ -27,7 +34,10 @@ public class Interfaz_2 extends javax.swing.JFrame {
         
     }
     
-    // Método para cargar los patrones en el ComboBox
+    /**
+     * Carga los patrones (tripletes) encontrados en la secuencia de ADN
+     * en el ComboBox para su selección.
+     */
     private void cargarComboPatrones() {
         patrones.removeAllItems(); // Limpiar items existentes
         
@@ -261,45 +271,100 @@ public class Interfaz_2 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que se ejecuta al hacer clic en el botón "Buscar".
+     * Muestra información sobre el triplete seleccionado (frecuencia y posiciones).
+     * 
+     * @param evt Evento de acción generado por el botón
+     */
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         // TODO add your handling code here:
-        
-        String tripleteSelecionado = (String) patrones.getSelectedItem();
-        if (tripleteSelecionado!=null) {
-            NodoHash nodo= tablaHash.buscar(tripleteSelecionado);
-            if (nodo!=null) {
-                triplete.setText(nodo.getTriplete());
-                frecuencia.setText(Integer.toString(nodo.getFrecuencia()));
-                posiciones.setText(nodo.getPosicion_to_String());
-            }else{
-                JOptionPane.showMessageDialog(this, "El trplete selecionado no existe", "Error", HEIGHT);
+        try{
+            
+            String tripleteSelecionado = (String) patrones.getSelectedItem();
+            if (tripleteSelecionado!=null) {
+                NodoHash nodo= tablaHash.buscar(tripleteSelecionado);
+                if (nodo!=null) {
+                    triplete.setText(nodo.getTriplete());
+                    frecuencia.setText(Integer.toString(nodo.getFrecuencia()));
+                    posiciones.setText(nodo.getPosicion_to_String());
+                }else{
+                    JOptionPane.showMessageDialog(this, "El trplete selecionado no existe", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
+        }catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "La tablaHash esta vacio", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
         
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void patronesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patronesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_patronesActionPerformed
-
+    
+    /**
+     * Método que se ejecuta al hacer clic en el botón "Patrón más frecuente".
+     * Muestra el triplete con mayor frecuencia en la secuencia de ADN.
+     * 
+     * @param evt Evento de acción generado por el botón
+     */
     private void butonMasFrecuenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butonMasFrecuenteActionPerformed
         // TODO add your handling code here:
-        MasFrecuente.setText(tablaHash.getPatronMasFrecuenteAsString());
+        if (!tablaHash.EsVacio()) {
+            MasFrecuente.setText(tablaHash.getPatronMasFrecuenteAsString());
+        }else{
+            JOptionPane.showMessageDialog(this, "La tablaHash esta vacio", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        
     }//GEN-LAST:event_butonMasFrecuenteActionPerformed
 
+    /**
+     * Método que se ejecuta al hacer clic en el botón "Patrón menos frecuente".
+     * Muestra el triplete con menor frecuencia en la secuencia de ADN.
+     * 
+     * @param evt Evento de acción generado por el botón
+     */
     private void botonMenosFrecuenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMenosFrecuenteActionPerformed
         // TODO add your handling code here:
-        MenosFrecuente.setText(tablaHash.getPatronMenosFrecuenteAsString());
+        if (!tablaHash.EsVacio()) {
+            MenosFrecuente.setText(tablaHash.getPatronMenosFrecuenteAsString());
+        }else{
+            JOptionPane.showMessageDialog(this, "La tablaHash esta vacio", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_botonMenosFrecuenteActionPerformed
 
+    /**
+     * Método que se ejecuta al hacer clic en el botón "Generar Reporte" de colisiones.
+     * Muestra un reporte de las colisiones ocurridas en la tabla hash.
+     * 
+     * @param evt Evento de acción generado por el botón
+     */
     private void ReporteColicionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteColicionesActionPerformed
         // TODO add your handling code here:
-        jTextArea2.setText(tablaHash.generarReporteColisiones());
+        if (!tablaHash.EsVacio()) {
+            jTextArea2.setText(tablaHash.generarReporteColisiones());
+        }else{
+            JOptionPane.showMessageDialog(this, "La tablaHash esta vacio", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_ReporteColicionesActionPerformed
 
+    /**
+     * Método que se ejecuta al hacer clic en el botón "Generar Reporte" de aminoácidos.
+     * Muestra un reporte de los aminoácidos correspondientes a los tripletes.
+     * 
+     * @param evt Evento de acción generado por el botón
+     */
     private void ReporteAminoácidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteAminoácidosActionPerformed
         // TODO add your handling code here:
-        jTextArea1.setText(tablaHash.generarReporteAminoacidos());
+        if (!tablaHash.EsVacio()) {
+            jTextArea1.setText(tablaHash.generarReporteAminoacidos());
+        }else{
+            JOptionPane.showMessageDialog(this, "La tablaHash esta vacio", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
         
     }//GEN-LAST:event_ReporteAminoácidosActionPerformed
 

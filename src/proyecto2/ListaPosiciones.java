@@ -67,7 +67,7 @@ public class ListaPosiciones {
      * 
      * @param indice El índice de la posición deseada (basado en 0)
      * @return La posición en la secuencia de ADN almacenada en ese índice
-     * @throws IndexOutOfBoundsException Si el índice está fuera del rango válido (0 ≤ indice < tamaño)
+     * @throws IndexOutOfBoundsException Si el índice está fuera del rango válido 
      */
     public int obtener(int indice) {
         if (indice < 0 || indice >= tamaño) {
